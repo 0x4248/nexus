@@ -209,7 +209,7 @@ int main(void)
 
             if (buf[i] == '\n') {
                 if (nl_enabled)
-                    // putchar('\n');
+                    putchar('\n');
                 i++;
                 continue;
             }

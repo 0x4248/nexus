@@ -12,12 +12,6 @@
  * public license version 3.0 as published by the Free Software Foundation.
 */
 
-/* SPDX-License-Identifier: GPL-3.0
- *
- * escpos-filter.c
- * Simple ESC/POS text filter
- */
-
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>

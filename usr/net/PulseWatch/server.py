@@ -6,7 +6,7 @@ import uuid
 from http.server import ThreadingHTTPServer, BaseHTTPRequestHandler
 from urllib.parse import urlparse, parse_qs
 
-DATA_DIR = "./data"
+DATA_DIR = "/var/lib/pulsewatch"
 os.makedirs(DATA_DIR, exist_ok=True)
 
 lock = threading.Lock()

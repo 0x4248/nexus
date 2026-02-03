@@ -14,6 +14,31 @@ logging.basicConfig(level=logging.INFO)
 PRINTER = "/dev/usb/lp0"
 JOB_DIR = "./data/jobs"
 
+STYLE = """
+* {
+    font-family: monospace;
+    background-color: #000;
+    color: #fff;
+}
+a {
+    color: #0f0;
+    cursor: pointer;
+    margin-right: 8px;
+}
+
+input, textarea {
+    background-color: #222;
+    color: #fff;
+    border: 1px solid #555;
+}
+
+input[type="submit"] {
+    background-color: #444;
+    border: 1px solid #888;
+    padding: 5px 10px;
+}
+"""
+
 # --- sanity checks ---------------------------------------------------------
 
 if not os.path.exists(PRINTER):
@@ -77,13 +102,50 @@ def submit_print_job():
 
 @app.route("/", methods=["GET"])
 def index():
-    return """
-    <h1>ESC/POS Print Server</h1>
-    <form action="/print/submit_job" method="post">
-        <textarea name="escpos_data" rows="10" cols="50"></textarea><br>
-        <input type="number" name="copies" value="1" min="1" max="10"><br>
-        <input type="submit">
-    </form>
+    return f"""
+    <html>
+    <head>
+        <style>{STYLE}</style>
+    </head>
+    <body>
+        <h1>ESC/POS Print Server</h1>
+
+        <p>Insert ESC/POS formatting tokens:</p>
+        <div>
+            <a onclick="appendText('[NORMAL]')">[NORMAL]</a>
+            <a onclick="appendText('[CENTER]')">[CENTER]</a>
+            <a onclick="appendText('[BOLD]')">[BOLD]</a>
+            <a onclick="appendText('[CUT]')">[CUT]</a>
+            <a onclick="appendText('[INVERT ON]')">[INVERT ON]</a>
+            <a onclick="appendText('[INVERT OFF]')">[INVERT OFF]</a>
+            <a onclick="appendText('[WIDE]')">[WIDE]</a>
+            <a onclick="appendText('[HR]')">[HR]</a>
+            <a onclick="appendText('[NL]')">[NL]</a>
+        </div>
+
+        <br>
+
+        <form action="/print/submit_job" method="post">
+            <textarea id="escpos_data"
+                      name="escpos_data"
+                      rows="12"
+                      cols="60"
+                      placeholder="Enter ESC/POS commands here..."></textarea>
+            <br><br>
+            Copies:
+            <input type="number" name="copies" value="1" min="1" max="10">
+            <br><br>
+            <input type="submit" value="Print">
+        </form>
+
+        <script>
+        function appendText(text) {{
+            var textarea = document.getElementById('escpos_data');
+            textarea.value += text;
+        }}
+        </script>
+    </body>
+    </html>
     """
 
 # --- main ------------------------------------------------------------------

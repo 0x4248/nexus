@@ -37,7 +37,7 @@ input[type="submit"] {
 """
 
 def generate_escpos_cmdline(print_id):
-    return f"./bin/escpos < ./data/jobs/{print_id}.epml > {PRINTER}"
+    return f"./build/escpos < ./data/jobs/{print_id}.epml > {PRINTER}"
 
 if not os.path.exists(PRINTER):
     logging.error(f"Printer device {PRINTER} does not exist. Please check the printer connection.")

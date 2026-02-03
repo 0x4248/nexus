@@ -75,14 +75,8 @@ def print_escpos(print_id):
     cmdline = generate_escpos_cmdline(print_id)
     logging.debug(f"Executing command: {cmdline}")
     
-    with open(job_file_path, "rb") as infile, open(PRINTER, "wb") as outfile:
-        process = Popen(
-            ["./build/escpos"],
-            stdin=infile,
-            stdout=outfile,
-            stderr=PIPE,
-        )
-        _, stderr = process.communicate()
+    process = Popen(cmdline, shell=True, stderr=PIPE)
+    process.communicate()
 
     
     if process.returncode != 0:

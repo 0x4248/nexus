@@ -11,6 +11,13 @@ os.makedirs(DATA_DIR, exist_ok=True)
 
 lock = threading.Lock()
 
+def load_json(path):
+    if not os.path.exists(path):
+        return {}
+    with open(path, "r") as f:
+        return json.load(f)
+
+
 def store_stats(host, payload):
     path = os.path.join(DATA_DIR, f"{host}.json")
     ts = str(int(time.time()))
@@ -69,25 +76,67 @@ class Handler(BaseHTTPRequestHandler):
         self.wfile.write(b"OK")
 
     def do_GET(self):
-        if not self.path.startswith("/ping"):
-            self.send_error(404)
+        parsed = urlparse(self.path)
+
+        # --- ping endpoint (unchanged) ---
+        if parsed.path == "/ping":
+            qs = parse_qs(parsed.query)
+            ts = qs.get("ts", [None])[0]
+            ping_id = qs.get("id", [None])[0]
+
+            if ts is None or ping_id is None:
+                self.send_error(400)
+                return
+
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.end_headers()
+            self.wfile.write(json.dumps({
+                "ts": ts,
+                "ping_id": ping_id
+            }).encode())
             return
 
-        qs = parse_qs(urlparse(self.path).query)
-        ts = qs.get("ts", [None])[0]
-        ping_id = qs.get("id", [None])[0]
+        # --- list hosts ---
+        if parsed.path == "/data/hosts":
+            hosts = []
+            for f in os.listdir(DATA_DIR):
+                if f.endswith(".json") and not f.endswith("_pings.json"):
+                    hosts.append(f.replace(".json", ""))
 
-        if ts is None or ping_id is None:
-            self.send_error(400)
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.end_headers()
+            self.wfile.write(json.dumps(hosts).encode())
             return
 
-        self.send_response(200)
-        self.send_header("Content-Type", "application/json")
-        self.end_headers()
-        self.wfile.write(json.dumps({
-            "ts": ts,
-            "ping_id": ping_id
-        }).encode())
+        # --- per-host data ---
+        if parsed.path.startswith("/data/host/"):
+            parts = parsed.path.split("/")
+            if len(parts) < 4:
+                self.send_error(404)
+                return
+
+            host = parts[3]
+            is_ping = len(parts) == 5 and parts[4] == "pings"
+
+            fname = (
+                f"{host}_pings.json"
+                if is_ping
+                else f"{host}.json"
+            )
+
+            path = os.path.join(DATA_DIR, fname)
+            data = load_json(path)
+
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.end_headers()
+            self.wfile.write(json.dumps(data).encode())
+            return
+
+        self.send_error(404)
+
 
     def log_message(self, *_):
         pass

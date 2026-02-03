@@ -165,4 +165,4 @@ def index():
     return head_html + form_html + job_list_html
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80, debug=True)
+    app.run(host="0.0.0.0", port=80, debug=False, use_reloader=False)

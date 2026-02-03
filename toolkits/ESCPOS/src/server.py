@@ -75,8 +75,15 @@ def print_escpos(print_id):
     cmdline = generate_escpos_cmdline(print_id)
     logging.debug(f"Executing command: {cmdline}")
     
-    process = Popen(shlex.split(cmdline), stdout=PIPE, stderr=PIPE)
-    stdout, stderr = process.communicate()
+    with open(job_file_path, "rb") as infile, open(PRINTER, "wb") as outfile:
+        process = Popen(
+            ["./build/escpos"],
+            stdin=infile,
+            stdout=outfile,
+            stderr=PIPE,
+        )
+        _, stderr = process.communicate()
+
     
     if process.returncode != 0:
         logging.error(f"Error printing job {print_id}: {stderr.decode('utf-8')}")

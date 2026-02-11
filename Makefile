@@ -36,6 +36,12 @@ precheck:
 			cat doc/make/errors/confmissing.msg | less; \
 			exit 1; \
 		fi; \
+		if which pandoc 2>/dev/null >/dev/null; then \
+			echo "PASS" > /dev/null; \
+		else \
+			echo "ERROR: pandoc is required to show help messages and manuals. Please install pandoc to proceed."; \
+			exit 1; \
+		fi; \
 	fi
 
 -include tools/build/make/includes.mk

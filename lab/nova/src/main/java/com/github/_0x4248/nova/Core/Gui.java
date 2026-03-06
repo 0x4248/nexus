@@ -7,6 +7,7 @@ import java.awt.event.*;
 
 public class Gui extends JPanel implements KeyListener {
 
+    private final JFrame frame;
     private final BufferedImage framebuffer;
     private final int framebufferWidth;
     private final int framebufferHeight;
@@ -20,7 +21,7 @@ public class Gui extends JPanel implements KeyListener {
         keyboard = new Keyboard();
         sound = new Sound();
 
-        JFrame frame = new JFrame("NovaEngine");
+        frame = new JFrame("NovaEngine");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(width, height);
         frame.add(this);
@@ -66,6 +67,11 @@ public class Gui extends JPanel implements KeyListener {
 
     public void biosBeep(int lengthMs, int pitchHz) {
         sound.biosBeep(lengthMs, pitchHz);
+    }
+
+    public void close() {
+        frame.setVisible(false);
+        frame.dispose();
     }
 
     @Override

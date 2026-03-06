@@ -1,49 +1,71 @@
 package com.github._0x4248.nova_examples;
 
-import com.github._0x4248.nova.BIOS.BIOS;
-import com.github._0x4248.nova.BIOS.BiosRuntime;
-import com.github._0x4248.nova.BIOS.machines.StandardMachine;
+import com.github._0x4248.nova.Machine.core.Keyboard;
+import com.github._0x4248.nova.Machine.core.Machine;
+import com.github._0x4248.nova.Machine.core.MachineProgram;
+import com.github._0x4248.nova.Machine.core.Video;
+import com.github._0x4248.nova.Machine.gpu.GPU;
 
-public class ExampleXYZ {
-    public static final int BOOTFLAG = 1;
+import java.awt.event.KeyEvent;
+
+public class ExampleXYZ implements MachineProgram {
 
     public static void main(String[] args) {
-        System.out.println("Launching Example XYZ...");
-        BiosRuntime bios = BIOS.getRuntime();
-        if (bios == null) {
-            bios = new BiosRuntime(new StandardMachine());
-        }
+        new ExampleXYZ().run(Machine.basic(), args);
+    }
 
-        bios.clear(1);
-        bios.drawText(24, 32, "HELLO WORLD", 15, 1, false);
-        bios.drawText(24, 48, "NOVA EXAMPLE XYZ", 14, 1, false);
+    @Override
+    public void run(Machine machine, String[] args) {
+        GPU gpu = machine.video().gpu;
+        Keyboard keyboard = machine.keyboard();
 
-        if (!bios.getMachine().supportsSound) {
-            bios.drawText(24, 64, "NO SOUND DEVICE", 12, 1, false);
-        }
+        gpu.init(Video.Modes.CGA_TEXT_40x25);
+        gpu.clear(0);
+        gpu.drawText(8, 8, "NOVA TEXT MODE", 15, 0, false);
+        gpu.drawText(8, 20, "Press ENTER for VGA graphics", 14, 0, false);
+        gpu.drawText(8, 32, "ESC exits", 10, 0, false);
+        gpu.present();
 
-        bios.present();
-        try{
-            Thread.sleep(2500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         while (true) {
-                bios.clear(0);
-                bios.beep(200, 440);
-                bios.present();
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                bios.drawText(0, 0, "This is just an example", 15, 0, false);
-                bios.present();
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+            Integer keyCode = keyboard.pollKeyCode();
+            if (keyCode == null) {
+                sleep(10);
+                continue;
+            }
+            if (keyCode == KeyEvent.VK_ESCAPE) {
+                break;
+            }
+            if (keyCode == KeyEvent.VK_ENTER) {
+                break;
+            }
+        }
+
+        gpu.init(Video.Modes.VGA_GRAPHICS_640x480_16);
+        gpu.clear(1);
+        gpu.drawText(8, 8, "VGA VIDEO MODE", 15, 1, false);
+
+        for (int x = 0; x < gpu.getWidth(); x++) {
+            int y = (int) (gpu.getHeight() * 0.5 + Math.sin(x / 20.0) * 50);
+            gpu.setPixel(x, y, 14);
+        }
+        gpu.present();
+
+        while (true) {
+            Integer keyCode = keyboard.pollKeyCode();
+            if (keyCode != null && keyCode == KeyEvent.VK_ESCAPE) {
+                break;
+            }
+            sleep(10);
+        }
+
+        gpu.shutdown();
+    }
+
+    private void sleep(long millis) {
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
         }
     }
 }

@@ -63,9 +63,12 @@ COMMIT_MSG.old
 # C
 !*.c
 !*.h
+!*.C
+!*.H
 
 # C++
 !*.cpp
+!*.CPP
 !*.c++
 !*.hpp
 !*.h++

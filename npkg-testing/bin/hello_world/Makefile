@@ -6,8 +6,8 @@ CFLAGS ?= -O2 -Wall
 PKG_NAME = hello-world
 PKG_VERSION = 0.1.0
 
-PREFIX ?= /usr
 DESTDIR ?=
+INSTALL_PATH ?= /usr/bin/
 
 SRC = src/hello_world.c
 BUILD_DIR = build
@@ -22,8 +22,8 @@ $(BUILD_DIR)/$(BIN): $(SRC)
 	$(CC) $(CFLAGS) $(SRC) -o $(BUILD_DIR)/$(BIN)
 
 install: all
-	install -d $(DESTDIR)$(PREFIX)/bin
-	install -m 0755 $(BUILD_DIR)/$(BIN) $(DESTDIR)$(PREFIX)/bin/$(BIN)
+	install -d $(DESTDIR)$(INSTALL_PATH)
+	install -m 0755 $(BUILD_DIR)/$(BIN) $(DESTDIR)$(INSTALL_PATH)$(BIN)
 
 clean:
 	rm -rf $(BUILD_DIR)

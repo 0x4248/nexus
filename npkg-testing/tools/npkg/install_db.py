@@ -20,27 +20,6 @@ def write_install_manifest(pkg: Package, install_root: Path, members: List[str])
         json.dump(manifest, handle, indent=2)
 
 
-def write_prebuilt_manifest(
-    package_name: str,
-    version: str,
-    install_root: Path,
-    members: List[str],
-    source_archive: Path,
-) -> None:
-    db_dir = manifest_root(install_root)
-    db_dir.mkdir(parents=True, exist_ok=True)
-    manifest = {
-        "package": package_name,
-        "version": version,
-        "install_root": str(install_root),
-        "source_archive": str(source_archive),
-        "paths": members,
-    }
-    manifest_path = package_manifest_path(package_name, install_root)
-    with manifest_path.open("w", encoding="utf-8") as handle:
-        json.dump(manifest, handle, indent=2)
-
-
 def read_install_manifest(pkg_name: str, install_root: Path) -> Dict[str, Any]:
     manifest_path = package_manifest_path(pkg_name, install_root)
     if not manifest_path.exists():

@@ -9,6 +9,7 @@ class Package:
     version: str
     description: str
     package_dir: Path
+    install_path: str
     build_command: Optional[str]
-    stage_command: Optional[str]
-    installable: bool
+    package_command: Optional[str]
+    clean_command: Optional[str]

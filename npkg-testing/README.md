@@ -18,7 +18,7 @@ Code and package folders live directly here so development stays simple.
 
 ## Demo Package
 
-`bin/hello_world` builds a C binary and packages it as `/bin/hello-world`.
+`bin/hello_world` builds a C binary and packages it as `/usr/bin/hello-world`.
 
 ## Commands
 
@@ -28,11 +28,16 @@ From repository root:
 ./npkg list
 ./npkg installed
 ./npkg build hello-world
+./npkg package hello-world
 ./npkg install hello-world
-./npkg install-prebuilt --file ./npkg-build/packages/hello-world-0.1.0.tar.gz
+./npkg clean hello-world
 ./npkg uninstall hello-world
 ```
 
+`build` compiles package sources only.
+`package` creates `npkg-build/packages/<name>-<version>.tar.gz`.
+
+Default install root is `/opt/npkg`, so installs land under `/opt/npkg/usr/...`.
 If `/opt/npkg` is not writable for your user, run install/uninstall with `sudo`.
 
 To run as `npkg ...` directly, symlink once:

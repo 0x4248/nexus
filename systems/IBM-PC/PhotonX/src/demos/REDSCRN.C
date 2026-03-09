@@ -17,8 +17,6 @@ int main()
         for (y = 0; y < 200; y++)
             vga_gfx_putpixel((uint16_t)x, (uint16_t)y, 63);
 
-    vga_gfx_puts("RED SCREEN", 120, 96, 0);
-    vga_gfx_puts("PRESS KEY", 124, 108, 0);
     vga_wait_key();
 
     vga_set_mode(VGA_MODE_TEXT_80x25);

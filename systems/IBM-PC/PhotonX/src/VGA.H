@@ -14,8 +14,6 @@ extern unsigned char far *vga;
 
 /* Core mode + utility */
 void vga_set_mode(uint8_t mode);
-void vga_beep(int freq, int ms);
-void vga_wait_key(void);
 
 /* Text mode API (whitepaper-aligned) */
 void vga_text_setcolor(uint8_t fg, uint8_t bg);
@@ -37,10 +35,8 @@ void vga_gfx_puts(const char *str, int x, int y, uint8_t color);
 
 /* Compatibility names for existing code */
 void set_mode(unsigned char mode);
-void beep(int freq, int ms);
 void set_palette(unsigned char index, unsigned char r, unsigned char g, unsigned char b);
 void clear_screen(unsigned char color);
 void put_pixel(int x, int y, unsigned char color);
-void wait_key(void);
 
 #endif

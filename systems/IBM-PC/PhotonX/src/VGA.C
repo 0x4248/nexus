@@ -30,17 +30,6 @@ void vga_set_mode(uint8_t mode)
     int86(0x10, &regs, &regs);
 }
 
-void vga_beep(int freq, int ms)
-{
-    sound(freq);
-    delay(ms);
-    nosound();
-}
-
-void vga_wait_key(void)
-{
-    getch();
-}
 
 void vga_text_setcolor(uint8_t fg, uint8_t bg)
 {
@@ -224,11 +213,6 @@ void set_mode(unsigned char mode)
     vga_set_mode((uint8_t)mode);
 }
 
-void beep(int freq, int ms)
-{
-    vga_beep(freq, ms);
-}
-
 void set_palette(unsigned char index, unsigned char r, unsigned char g, unsigned char b)
 {
     vga_set_palette((uint8_t)index, (uint8_t)r, (uint8_t)g, (uint8_t)b);
@@ -246,11 +230,6 @@ void put_pixel(int x, int y, unsigned char color)
         return;
 
     vga_gfx_putpixel((uint16_t)x, (uint16_t)y, (uint8_t)color);
-}
-
-void wait_key(void)
-{
-    vga_wait_key();
 }
 
 void vga_reset(void)

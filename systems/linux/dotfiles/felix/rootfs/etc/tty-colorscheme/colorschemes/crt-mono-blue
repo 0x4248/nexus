@@ -1,0 +1,17 @@
+color01="0B0E12" # Black (Background) - blue tint
+color02="7A2E2E" # Red
+color03="3A7A5A" # Green
+color04="D6D68A" # Yellow
+color05="3A5F9A" # Blue
+color06="7A5A9A" # Magenta
+color07="4A9A9A" # Cyan
+color08="CFE6FF" # White (Foreground)
+
+color09="1E2530" # Black
+color10="B04040" # Red
+color11="5FBF8A" # Green
+color12="FFFFA0" # Yellow
+color13="5F8FFF" # Blue
+color14="A080C0" # Magenta
+color15="6FD8D8" # Cyan
+color16="F0F8FF" # White (brightest)

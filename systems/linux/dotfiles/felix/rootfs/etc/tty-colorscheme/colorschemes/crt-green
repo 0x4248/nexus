@@ -1,0 +1,17 @@
+color01="071A0B" # Black (Background) - dark green tint
+color02="5A1F1F" # Red - dark muted red
+color03="2F7A3A" # Green - phosphor green
+color04="A6D94E" # Yellow - bright greenish yellow
+color05="1F3F6A" # Blue - dark CRT blue
+color06="5C3A5C" # Magenta - muted violet
+color07="3F7A6A" # Cyan - teal
+color08="9EDC9E" # White (Foreground) - soft phosphor green
+
+color09="0F2A14" # Black (bright) - lifted background
+color10="8A2F2F" # Red (bright)
+color11="4FBF5F" # Green (bright phosphor)
+color12="D8FF6A" # Yellow (brightest yellow)
+color13="3F6FA8" # Blue (bright)
+color14="8A5A8A" # Magenta (bright)
+color15="5FAF9F" # Cyan (bright)
+color16="E8FFE8" # White (brightest)

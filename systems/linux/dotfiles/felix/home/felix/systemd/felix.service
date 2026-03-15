@@ -3,10 +3,11 @@ Description=Felix Console Init
 After=network.target
 
 [Service]
-Type=simple
+Type=forking
 ExecStart=/root/felix/felix_init.sh
 Restart=always
 User=root
+RemainAfterExit=true
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=multi-user.targetpload files and images, and more.

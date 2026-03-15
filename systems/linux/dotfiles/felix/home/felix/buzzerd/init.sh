@@ -15,7 +15,7 @@ fi
 
 # Start Python daemon if not already running
 if ! pgrep -f buzzerd.py >/dev/null; then
-    python3 /root/felix/buzzerd.py &
+    python3 /root/felix/buzzerd/buzzerd.py &
 fi
 
 echo "Felix init done"

@@ -9,3 +9,5 @@ fi
 
 bash /root/felix/systemd/install.sh
 systemctl daemon-reload
+chmod -x /root/felix/felix_init.sh
+

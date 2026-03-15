@@ -4,10 +4,12 @@ After=network.target
 
 [Service]
 Type=forking
-ExecStart=/root/felix/felix_init.sh
+ExecStart=/bin/bash /root/felix/felix_init.sh
 Restart=always
 User=root
 RemainAfterExit=true
+StandardOutput=tty
+TTYPath=/dev/console
 
 [Install]
-WantedBy=multi-user.targetpload files and images, and more.
+WantedBy=multi-user.target

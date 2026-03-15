@@ -1,17 +1,21 @@
-# Setup arduino buzzer
+#!/bin/bash
 
-if [ ! -e /dev/ttyACM0 ]; then
-    echo "Error: /dev/ttyACM0 not found. Please connect the Arduino device and try again."
-    exit 1
+SERIAL="/dev/ttyACM0"
+PIPE="/dev/buzzer"
+
+# Give permissions
+chmod a+rw $SERIAL
+stty -F $SERIAL 115200 raw -echo
+
+# Create named pipe if it doesn't exist
+if [ ! -p "$PIPE" ]; then
+    mkfifo "$PIPE"
+    chmod 666 "$PIPE"
 fi
-chmod a+rw /dev/ttyACM0
-stty -F /dev/ttyACM0 115200 raw -echo
 
-mkfifo /tmp/buzzer
-chmod 666 /tmp/buzzer
+# Start Python daemon if not already running
+if ! pgrep -f buzzerd.py >/dev/null; then
+    python3 /root/felix/buzzerd.py &
+fi
 
-python3 buzzerd.py &
-
-echo 500 > /tmp/buzzer
-sleep 1
-echo 0 > /tmp/buzzer
+echo "Felix init done"

@@ -1,0 +1,272 @@
+[
+  {
+    "title": "System",
+    "help": "System information and monitoring tools.",
+    "submenu": [
+      {
+        "title": "btop",
+        "cmd": "btop",
+        "help": "Interactive resource monitor. CPU, memory, disk, network at a glance."
+      },
+      {
+        "title": "htop",
+        "cmd": "htop",
+        "help": "Classic interactive process viewer. Kill, renice, and filter processes."
+      },
+      {
+        "title": "CPU info",
+        "cmd": "lscpu | less",
+        "help": "Show CPU architecture, cores, cache, and frequency details."
+      },
+      {
+        "title": "Memory usage",
+        "cmd": "free -h && echo '' && vmstat -s | head -20",
+        "help": "Show RAM and swap usage in human-readable form plus vmstat summary."
+      },
+      {
+        "title": "Hardware summary",
+        "cmd": "inxi -Fxz | less",
+        "help": "Full hardware overview: CPU, RAM, disks, network, audio. Requires inxi."
+      },
+      {
+        "title": "Uptime & load",
+        "cmd": "uptime && echo '' && w",
+        "help": "System uptime, load averages, and logged-in users."
+      },
+      {
+        "title": "Temperatures",
+        "cmd": "sensors",
+        "help": "CPU and motherboard temperatures via lm-sensors. Run sensors-detect first if blank."
+      },
+      {
+        "title": "USB devices",
+        "cmd": "lsusb -v 2>/dev/null | less",
+        "help": "List all connected USB devices with verbose details."
+      },
+      {
+        "title": "PCI devices",
+        "cmd": "lspci -v | less",
+        "help": "List PCI/PCIe devices: graphics card, sound, network controllers etc."
+      }
+    ]
+  },
+  {
+    "title": "Network",
+    "help": "Network status, configuration, and diagnostic tools.",
+    "submenu": [
+      {
+        "title": "nmtui",
+        "cmd": "nmtui",
+        "help": "NetworkManager text UI. Connect to wifi, edit connections, set hostname."
+      },
+      {
+        "title": "Connection status",
+        "cmd": "nmcli device status && echo '' && nmcli connection show --active",
+        "help": "Show all network devices and currently active connections."
+      },
+      {
+        "title": "IP addresses",
+        "cmd": "ip -c addr show | less",
+        "help": "Show all network interfaces and their assigned IP addresses."
+      },
+      {
+        "title": "Routing table",
+        "cmd": "ip route show",
+        "help": "Display the kernel routing table."
+      },
+      {
+        "title": "DNS lookup",
+        "cmd": "read -p 'Host to resolve: ' h && dig +short $h && echo '' && dig +short -x $(dig +short $h | head -1)",
+        "help": "Forward and reverse DNS lookup for any hostname."
+      },
+      {
+        "title": "Ping gateway",
+        "cmd": "ping -c 5 $(ip route | awk '/default/ {print $3; exit}')",
+        "help": "Ping your default gateway 5 times to check local connectivity."
+      },
+      {
+        "title": "Open ports",
+        "cmd": "ss -tulnp | less",
+        "help": "List all listening TCP and UDP ports with the process using them."
+      },
+      {
+        "title": "Bandwidth monitor",
+        "cmd": "bmon",
+        "help": "Real-time per-interface bandwidth monitor. Requires bmon."
+      },
+      {
+        "title": "Trace route",
+        "cmd": "read -p 'Target host: ' h && traceroute $h",
+        "help": "Trace the network path to a remote host hop by hop."
+      },
+      {
+        "title": "Firewall status",
+        "cmd": "sudo ufw status verbose",
+        "help": "Show current UFW firewall rules and status."
+      }
+    ]
+  },
+  {
+    "title": "Disk & Files",
+    "help": "Disk usage, filesystem, and file management tools.",
+    "submenu": [
+      {
+        "title": "Disk usage (ncdu)",
+        "cmd": "ncdu /",
+        "help": "Interactive disk usage browser. Navigate with arrows, delete with d. Requires ncdu."
+      },
+      {
+        "title": "Filesystem overview",
+        "cmd": "df -hT | less",
+        "help": "Show all mounted filesystems, their type, size, used, and available space."
+      },
+      {
+        "title": "Block devices",
+        "cmd": "lsblk -o NAME,SIZE,TYPE,FSTYPE,MOUNTPOINT,LABEL",
+        "help": "Tree view of all block devices: disks, partitions, loop devices."
+      },
+      {
+        "title": "SMART status",
+        "cmd": "lsblk -dno NAME | grep -E 'sd|nvme' | while read d; do echo \"--- /dev/$d ---\"; sudo smartctl -H /dev/$d; done",
+        "help": "Check SMART health status for all drives. Requires smartmontools."
+      },
+      {
+        "title": "Mount a device",
+        "cmd": "lsblk && echo '' && read -p 'Device (e.g. sdb1): ' d && read -p 'Mount point: ' m && sudo mount /dev/$d $m && echo Mounted.",
+        "help": "List block devices then mount a chosen device to a path."
+      },
+      {
+        "title": "Unmount a device",
+        "cmd": "lsblk && echo '' && read -p 'Mount point to unmount: ' m && sudo umount $m && echo Done.",
+        "help": "Unmount a filesystem by its mount point."
+      },
+      {
+        "title": "Find large files",
+        "cmd": "read -p 'Search under (default /home): ' d && find ${d:-/home} -type f -printf '%s %p\\n' 2>/dev/null | sort -rn | head -30 | awk '{printf \"%-10s %s\\n\", $1/1024/1024 \"MB\", $2}' | less",
+        "help": "Find the 30 largest files under a given directory."
+      },
+      {
+        "title": "Midnight Commander",
+        "cmd": "mc",
+        "help": "Two-pane file manager with built-in viewer and editor. Requires mc."
+      }
+    ]
+  },
+  {
+    "title": "Packages",
+    "help": "APT package management shortcuts.",
+    "submenu": [
+      {
+        "title": "Update package list",
+        "cmd": "sudo apt update",
+        "help": "Refresh the APT package index from all configured sources."
+      },
+      {
+        "title": "Upgrade all packages",
+        "cmd": "sudo apt update && sudo apt upgrade",
+        "help": "Update package list then upgrade all installed packages."
+      },
+      {
+        "title": "Full upgrade",
+        "cmd": "sudo apt update && sudo apt full-upgrade",
+        "help": "Like upgrade but also handles changing dependencies and removes obsolete packages."
+      },
+      {
+        "title": "Install a package",
+        "cmd": "read -p 'Package name: ' p && sudo apt install $p",
+        "help": "Install a package by name."
+      },
+      {
+        "title": "Remove a package",
+        "cmd": "read -p 'Package to remove: ' p && sudo apt remove $p",
+        "help": "Remove a package but keep its configuration files."
+      },
+      {
+        "title": "Purge a package",
+        "cmd": "read -p 'Package to purge: ' p && sudo apt purge $p",
+        "help": "Remove a package and delete its configuration files."
+      },
+      {
+        "title": "Search packages",
+        "cmd": "read -p 'Search term: ' q && apt-cache search $q | less",
+        "help": "Search APT for packages matching a keyword."
+      },
+      {
+        "title": "Show package info",
+        "cmd": "read -p 'Package name: ' p && apt-cache show $p | less",
+        "help": "Display detailed info about a package: version, deps, description."
+      },
+      {
+        "title": "List installed",
+        "cmd": "dpkg --get-selections | grep -v deinstall | less",
+        "help": "List all currently installed packages."
+      },
+      {
+        "title": "Autoremove",
+        "cmd": "sudo apt autoremove",
+        "help": "Remove packages that were installed as dependencies but are no longer needed."
+      },
+      {
+        "title": "Clean cache",
+        "cmd": "sudo apt clean && sudo apt autoclean",
+        "help": "Delete downloaded package files from the APT cache to free disk space."
+      }
+    ]
+  },
+  {
+    "title": "Logs & Diagnostics",
+    "help": "System logs, journal, and diagnostic tools.",
+    "submenu": [
+      {
+        "title": "journalctl (live)",
+        "cmd": "journalctl -f --output=short-precise",
+        "help": "Follow the systemd journal live. Shows new log entries as they arrive."
+      },
+      {
+        "title": "journalctl (boot)",
+        "cmd": "journalctl -b --output=short-precise | less",
+        "help": "Show all log entries from the current boot."
+      },
+      {
+        "title": "journalctl (errors)",
+        "cmd": "journalctl -b -p err --output=short-precise | less",
+        "help": "Show only error-level and above messages from the current boot."
+      },
+      {
+        "title": "Previous boot log",
+        "cmd": "journalctl -b -1 --output=short-precise | less",
+        "help": "Show journal from the previous boot. Useful after a crash or unexpected reboot."
+      },
+      {
+        "title": "Kernel ring buffer",
+        "cmd": "dmesg --color=never -T | less",
+        "help": "Show kernel messages with human-readable timestamps. Good for hardware issues."
+      },
+      {
+        "title": "Failed services",
+        "cmd": "systemctl --failed",
+        "help": "List all systemd units that are currently in a failed state."
+      },
+      {
+        "title": "Service status",
+        "cmd": "read -p 'Service name: ' s && systemctl status $s | less",
+        "help": "Check the status and recent log output of any systemd service."
+      },
+      {
+        "title": "Auth log",
+        "cmd": "sudo journalctl -u ssh -b | less",
+        "help": "Show SSH login attempts and authentication events from this boot."
+      },
+      {
+        "title": "Disk errors",
+        "cmd": "sudo journalctl -b -k | grep -iE 'error|fail|bad sector|ata' | less",
+        "help": "Filter kernel journal for disk-related errors and ATA messages."
+      },
+      {
+        "title": "Last logins",
+        "cmd": "last | head -30",
+        "help": "Show the 30 most recent user logins and reboots."
+      }
+    ]
+  }
+]

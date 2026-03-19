@@ -1,0 +1,35 @@
+body {
+  font-family: "Times New Roman", Times, serif;
+  line-height: 1.65;
+  background: #ffffff;
+  color: #111111;
+}
+
+div.body {
+  max-width: 48rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Times New Roman", Times, serif;
+  font-weight: 600;
+}
+
+h1 {
+  break-before: page;
+  page-break-before: always;
+}
+
+h1:first-of-type {
+  break-before: auto;
+  page-break-before: auto;
+}
+
+p {
+  text-align: justify;
+}
+
+code,
+pre,
+tt {
+  font-family: "Liberation Mono", "DejaVu Sans Mono", monospace;
+}

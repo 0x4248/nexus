@@ -1,122 +1,65 @@
-PANDOC      ?= pandoc
-SRC_DIR     ?= docs
-BUILD_DIR   ?= build
-TITLE       ?= 4248's Linux Reference Manual
-#PDF_ENGINE  ?= $(shell for e in tectonic xelatex lualatex pdflatex weasyprint prince; do \
-#                 command -v $$e >/dev/null 2>&1 && { echo $$e; break; }; done)
+PANDOC ?= pandoc
+BUILDDIR = build
+CSS = docs/_static/whitepaper.css
+TITLE = The 0x4248 Linux Reference Manual
+SUBTITLE = For x86-64 Systems
+HTMLDIR = $(BUILDDIR)/html
 
-PDF_ENGINE  = xelatex
-CSS          := $(SRC_DIR)/assets/style.css
-FRONT_MATTER := $(SRC_DIR)/index.md
-CHAPTERS     := $(sort $(shell find $(SRC_DIR)/chapters -type f -name '*.md'))
-BOOK_SOURCES := $(FRONT_MATTER) $(CHAPTERS)
+CHAPTERS = $(sort $(shell find docs/chapters -name '*.md'))
 
-# Per-chapter HTML: docs/chapters/XX-name.md -> build/html/chapters/XX-name.html
-CHAPTER_HTMLS := $(patsubst $(SRC_DIR)/chapters/%.md,$(BUILD_DIR)/html/chapters/%.html,$(CHAPTERS))
+CHAPTER_HTMLS = $(patsubst docs/chapters/%.md,$(HTMLDIR)/chapters/%.html,$(CHAPTERS))
+HTML_INDEX = $(HTMLDIR)/index.html
 
-HTML_INDEX := $(BUILD_DIR)/html/index.html
-PDF_OUT    := $(BUILD_DIR)/pdf/manual.pdf
+.PHONY: html pdf docs pdfdocs clean
 
-.PHONY: help all docs htmldocs pdfdocs cleandocs clean check-pandoc check-pdf-engine listdocs
+html: $(HTML_INDEX) $(CHAPTER_HTMLS)
 
-# ── Help ─────────────────────────────────────────────────────────────────────
-help:
-	@echo "Targets:"
-	@echo "  make htmldocs   - Build per-chapter HTML manual"
-	@echo "  make pdfdocs    - Build PDF manual (new page per chapter)"
-	@echo "                    override engine: make pdfdocs PDF_ENGINE=xelatex"
-	@echo "  make docs       - Build both"
-	@echo "  make listdocs   - Show input source files"
-	@echo "  make cleandocs  - Remove generated output"
+pdf: $(BUILDDIR)/manual.pdf
 
-all: docs
-docs: htmldocs pdfdocs
+$(BUILDDIR):
+	mkdir -p $(BUILDDIR)
 
-# ── Dependency checks ─────────────────────────────────────────────────────────
-check-pandoc:
-	@command -v $(PANDOC) >/dev/null 2>&1 || { \
-		echo "error: pandoc is not installed"; exit 1; \
-	}
+$(HTMLDIR):
+	mkdir -p $(HTMLDIR)
 
-check-pdf-engine:
-	@test -n "$(PDF_ENGINE)" || { \
-		echo "error: no PDF engine found"; \
-		echo "install one of: tectonic, xelatex, lualatex, pdflatex, weasyprint, prince"; \
-		echo "or specify: make pdfdocs PDF_ENGINE=xelatex"; \
-		exit 1; \
-	}
-	@command -v $(PDF_ENGINE) >/dev/null 2>&1 || { \
-		echo "error: PDF engine '$(PDF_ENGINE)' is not installed"; \
-		echo "specify another: make pdfdocs PDF_ENGINE=xelatex"; \
-		exit 1; \
-	}
+$(HTMLDIR)/chapters/%.html: docs/chapters/%.md | $(HTMLDIR)
+	mkdir -p $(dir $@)
+	$(PANDOC) --standalone --embed-resources --metadata title='$(TITLE)' --metadata subtitle='$(SUBTITLE)' --css=$(CSS) -o $@ $<
 
-listdocs:
-	@printf '%s\n' $(BOOK_SOURCES)
-
-# ── HTML: one file per chapter ────────────────────────────────────────────────
-#
-# Each chapter is built as a self-contained HTML file (CSS embedded inline)
-# so the output in build/html/chapters/ is portable with no external deps.
-
-$(BUILD_DIR)/html/chapters/%.html: $(SRC_DIR)/chapters/%.md $(CSS) | check-pandoc
-	@mkdir -p $(dir $@)
-	$(PANDOC) $< \
-		--standalone \
-		--embed-resources \
-		--toc \
-		--number-sections \
-		--metadata title="$(TITLE)" \
-		--css=$(CSS) \
-		-o $@
-
-# Index page: intro content + auto-generated chapter listing
-$(HTML_INDEX): $(FRONT_MATTER) $(CHAPTERS) $(CSS) | check-pandoc
-	@mkdir -p $(dir $@)
-	@{ \
-		cat $(FRONT_MATTER); \
-		echo ""; \
-		echo "## Chapters"; \
-		for f in $(CHAPTERS); do \
-			rel=$${f#$(SRC_DIR)/chapters/}; \
-			base=$${rel%.md}; \
-			title=$$(grep -m1 '^# ' $$f | sed 's/^# //'); \
-			echo "- [$$title](chapters/$$base.html)"; \
+$(HTML_INDEX): $(CHAPTERS) $(CHAPTER_HTMLS) | $(HTMLDIR)
+	{ \
+		echo '# $(TITLE)'; \
+		echo ''; \
+		echo '## Contents'; \
+		echo ''; \
+		for file in $(CHAPTERS); do \
+			rel=$${file#docs/chapters/}; \
+			link=$${rel%.md}.html; \
+			title=$$(grep -m1 '^# ' $$file | sed 's/^# //'); \
+			if [ -z "$$title" ]; then title=$$rel; fi; \
+			echo "- [$$title](chapters/$$link)"; \
 		done; \
-	} | $(PANDOC) \
-		--standalone \
-		--embed-resources \
-		--metadata title="$(TITLE)" \
-		--css=$(CSS) \
-		-o $@
+	} | $(PANDOC) --standalone --embed-resources --metadata title='$(TITLE)' --metadata subtitle='$(SUBTITLE)' --css=$(CSS) -o $@
 
-htmldocs: $(HTML_INDEX) $(CHAPTER_HTMLS)
-	@echo "HTML built: $(BUILD_DIR)/html/"
-
-# ── PDF: new page per chapter ─────────────────────────────────────────────────
-#
-# --top-level-division=chapter maps each top-level # heading to a LaTeX
-# \chapter{}, which starts a new page in the 'report' document class.
-
-$(PDF_OUT): $(BOOK_SOURCES) | check-pandoc check-pdf-engine
-	@mkdir -p $(dir $@)
-	$(PANDOC) $(BOOK_SOURCES) \
-		--toc \
-		--number-sections \
-		--top-level-division=chapter \
-		--metadata title="$(TITLE)" \
+$(BUILDDIR)/manual.pdf: $(CHAPTERS) | $(BUILDDIR)
+	$(PANDOC) --toc --top-level-division=chapter \
 		-V documentclass=report \
+		-V papersize=a4 \
+		-V fontsize=11pt \
 		-V geometry:margin=1in \
-		-V colorlinks=true \
-		-V linkcolor=blue \
-		--pdf-engine=$(PDF_ENGINE) \
-		-o $@
+		-V fontfamily=tgtermes \
+		--metadata title='$(TITLE)' \
+		--metadata subtitle='$(SUBTITLE)' \
+		-o $(BUILDDIR)/_content.pdf $(CHAPTERS)
+	@if [ -f cover.pdf ]; then \
+		pdfunite cover.pdf $(BUILDDIR)/_content.pdf $@ && rm $(BUILDDIR)/_content.pdf; \
+	else \
+		mv $(BUILDDIR)/_content.pdf $@; \
+	fi
 
-pdfdocs: $(PDF_OUT)
-	@echo "PDF built: $(PDF_OUT)"
+docs: html
 
-# ── Cleanup ───────────────────────────────────────────────────────────────────
-cleandocs:
-	rm -rf $(BUILD_DIR)/html $(BUILD_DIR)/pdf
+pdfdocs: pdf
 
-clean: cleandocs
+clean:
+	rm -rf $(BUILDDIR)

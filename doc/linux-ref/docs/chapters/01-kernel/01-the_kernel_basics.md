@@ -290,61 +290,202 @@ With this information we can do two things:
 - Don't recompile the kernel and use `module_blacklist` to prevent the module 
   from loading.
 
-## The /boot Directory
+# The Hello World System Tutorial
 
-The `/boot` directory is where the kernel and its related files are stored. This
-directory is critical for the boot process, as it contains the kernel image and
-the initial RAM filesystem (initramfs) that the kernel uses during boot.
+In this section we are going to make a simple "Hello World" Linux System. If
+you look at the last part we already have build the kernel, now we just need to
+make a simple initramfs and boot it.
 
-If you open this directory, you should see three important files:
+## What is an initramfs?
 
-- `vmlinuz-<version>`: This is the compressed Linux kernel image.
-- `initramfs-<version>.img`: This is the initial RAM filesystem image.
-- `initrd.img-<version>`: This is the initial RAM disk image. This is a legacy
-    format that is mostly unused now, but some older systems may still use it.
+An initramfs is a temporary root filesystem that is loaded into memory by the
+bootloader before the actual root filesystem is mounted. It contains a minimal set
+of files and directories that are needed to boot the system and mount the actual
+root filesystem. The initramfs is typically used to load necessary drivers and
+modules that are required to access the root filesystem, such as disk drivers or
+network drivers.
 
-Here is what my `/boot/` directory looks like:
+## What is an init?
+
+The `init` process is the first process that is executed by the kernel after it
+has finished initializing the system. It is responsible for starting all other
+processes and services on the system. The `init` process is typically located at
+`/sbin/init` or `/bin/init`.
+
+## Installing required tools
+
+To create an initramfs, we can use `QEMU` to test our kernel and initramfs. QEMU
+is perfect for this because it allows for the `-kernel` and `-initrd` options, 
+which allow us to easily test our kernel and initramfs without having to set up 
+a full bootloader and disk image.
+
+*A tutorial on how to set up a full bootloader and disk image will be covered
+later in the* **Bootloaders** *chapter.*
+
+We will also need a basic compiler which should already be installed from the 
+previous section.
+
+**Install QEMU:**
 
 ```bash
-[root@arch boot]# ls -l
-total 24916
-drwxr-xr-x 6 root root     4096 Mar 19 19:50 grub
--rwxr-xr-x 1 root root  9038759 Mar 19 19:50 initramfs-linux.img
--rwxr-xr-x 1 root root 16466432 Mar 19 19:50 vmlinuz-linux
-[root@arch boot]# 
+# Debian/Trixie
+apt install qemu-system-x86
 ```
 
-### Vmlinuz
+```bash
+# Arch Linux
+pacman -S qemu
+```
 
-**V**irtual **M**emory **LINU**x g**Z**ip. This is the compressed Linux kernel
-image. When the system boots, the bootloader loads this image into memory and
-decompresses it to start the operating system.
+### Test QEMU with our kernel
 
-### RAM Disks
+We should have already built our kernel in the previous section. 
 
-A RAM disk is a virtual disk that resides in the system's RAM. It is used during
-the boot process to provide a temporary root filesystem before the actual root
-filesystem is mounted. This allows the kernel to load necessary drivers and
-modules. This is because things like controller drivers for disks and other 
-devices may not work without the RAM disk.
+```bash
+cd linux
+ls arch/x86/boot/bzImage
+```
 
-#### Types of RAM Disks
+*Expected output:*
 
-- **initramfs**: This is the modern format for the initial RAM filesystem. It is
-    a compressed `CPIO` archive that is loaded into memory and used as the initial
-    root filesystem during boot.
-- **initrd**: This is the older format for the initial RAM disk.
+```
+arch/x86/boot/bzImage
+```
 
-Linux supports these compressions on the kernel and initramfs images:
+Now we can test our kernel with QEMU:
 
-- gzip
-- bzip2
-- xz
-- lzma
-- lzop
-- lz4
-- zstd
+```bash
+qemu-system-x86_64 -kernel arch/x86/boot/bzImage
+```
 
-**Note**: The kernel can not load the initramfs if it is compressed with a 
-compression algorithm that the kernel has not been compiled with support for. 
-Ensure you enable support for the compression algorithm using `menuconfig`.
+If you are on a TTY like myself you may want to use nographic and redirect the output to the console:
+
+```bash
+qemu-system-x86_64 -kernel arch/x86/boot/bzImage -nographic -append "console=ttyS0"
+```
+
+**TIP**: *If you are using nographic you might encounter being stuck with no way
+of exiting QEMU. Its fairly simple to exit, just press `Ctrl + A` and then `X` to exit QEMU.*
+
+You should see a lot of text and then a kernel panic. Don't worry it's very
+expected. Actually a kernel panic that says:
+
+```
+VFS: Unable to mount root fs on unknown-block(0,0)
+```
+
+or 
+
+```
+No working init found. Try passing init= option to kernel. See Linux Documentation/init.txt for guidance.
+```
+
+Is good news, it means the kernel is working and isnt hitting on any critical 
+errors since mounting the `root` filesystem and starting `init` is one of the
+last steps in the boot process.
+
+## Creating a simple initramfs in C
+
+Now we can create a simple initramfs that will print "Hello World" and then
+halt the system. We will write a simple `init` process in C and then turn it 
+into a CPIO initramfs.
+
+Now lets make a folder to hold our initramfs files:
+
+```bash
+mkdir initramfs
+cd initramfs
+touch init.c
+touch build.sh
+```
+
+And we should install `cpio` to create the initramfs:
+```bash
+# Debian/Trixie
+apt install cpio
+
+# Arch Linux
+pacman -S cpio
+```
+
+
+*init.c*
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+int main() {
+    while (1) {
+        printf("Hello World\n");
+        sleep(5);
+    }
+    return 0;
+}
+```
+
+Just using `GCC` will not work because it will use shared libraries that are not
+included in our initramfs. The `-static` flag tells `GCC` to create a statically
+linked binary that does not depend on any shared libraries.
+
+```
+# For now we are testing to see if it can compile then we will make a dedicated
+# build script to automate the process.
+gcc -o init init.c -static
+rm init
+```
+
+### Build script
+
+To simplify development we can create a build script that will compile our 
+`init` binary and then create the initramfs using `cpio`.
+
+*build.sh*
+```bash
+#!/bin/bash
+mkdir -p build
+gcc -o build/init init.c -static
+cd build
+find . | cpio -H newc -o > ../initramfs.cpio
+cd ..
+```
+
+Now we can run the build script to create our initramfs:
+
+```bash
+chmod +x build.sh
+./build.sh
+```
+
+This will create a file called `initramfs.cpio` in the root of our `initramfs`
+directory. This is our initramfs that we can use to boot our kernel.
+Now we can test our kernel with our initramfs:
+
+```bash
+qemu-system-x86_64 -kernel ../linux/arch/x86/boot/bzImage \
+                -initrd initramfs.cpio
+
+# For TTY users:
+qemu-system-x86_64 -kernel ../linux/arch/x86/boot/bzImage \
+                -initrd initramfs.cpio \
+                -nographic -append "console=ttyS0"
+```
+
+You should see these two important lines
+
+```
+[    4.247268] Run /init as init process
+Hello World
+```             
+
+1.  At T+4.247268 seconds, the kernel has successfully loaded the initramfs and is 
+    running the `/init` process as the init process.
+2.  The `Hello World` message is printed every 5 seconds, indicating that our
+    init process is running correctly.
+
+
+$$
+\text{\Huge Congratulations!}
+$$
+$$
+\text{\small You now have a basic understanding of the Linux kernel}
+$$

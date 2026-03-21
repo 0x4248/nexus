@@ -7,6 +7,7 @@ AUTHOR = 0x4248
 BUILD_DATE = $(shell date -u +"%Y-%m-%d")
 HTMLDIR = $(BUILDDIR)/html
 COVER_ENABLE ?= 1
+COVER_PDF ?= cover_compressed.pdf
 
 CHAPTERS = $(sort $(shell find docs/chapters -name '*.md'))
 
@@ -45,15 +46,15 @@ $(HTML_INDEX): $(CHAPTERS) $(CHAPTER_HTMLS) | $(HTMLDIR)
 	} | $(PANDOC) --standalone --embed-resources --metadata title='$(TITLE)' --metadata subtitle='$(SUBTITLE)' --css=$(CSS) -o $@
 
 $(BUILDDIR)/manual.pdf: $(CHAPTERS) | $(BUILDDIR)
-	@# Resolve cover.pdf: prefer cover.html, fall back to cover.pdf in root
+	@# Resolve $(COVER_PDF): prefer cover.html, fall back to $(COVER_PDF) in root
 	@if [ "$(COVER_ENABLE)" = "1" ] && [ -f cover.html ]; then \
-		$(PANDOC) --standalone -V papersize=a4 -V geometry:margin=1in -o $(BUILDDIR)/cover.pdf cover.html; \
-	elif [ "$(COVER_ENABLE)" = "1" ] && [ -f cover.pdf ]; then \
-		cp cover.pdf $(BUILDDIR)/cover.pdf; \
+		$(PANDOC) --standalone -V papersize=a4 -V geometry:margin=1in -o $(BUILDDIR)/$(COVER_PDF) cover.html; \
+	elif [ "$(COVER_ENABLE)" = "1" ] && [ -f $(COVER_PDF) ]; then \
+		cp $(COVER_PDF) $(BUILDDIR)/$(COVER_PDF); \
 	fi
 	@# Build a before-body snippet that embeds the cover via pdfpages (no pdfunite)
-	@if [ -f $(BUILDDIR)/cover.pdf ]; then \
-		echo '\includepdf[pages=-]{$(BUILDDIR)/cover.pdf}' > $(BUILDDIR)/cover-include.tex; \
+	@if [ -f $(BUILDDIR)/$(COVER_PDF) ]; then \
+		echo '\includepdf[pages=-]{$(BUILDDIR)/$(COVER_PDF)}' > $(BUILDDIR)/cover-include.tex; \
 	else \
 		printf '' > $(BUILDDIR)/cover-include.tex; \
 	fi

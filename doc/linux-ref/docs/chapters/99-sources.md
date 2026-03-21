@@ -17,3 +17,5 @@ Many thanks to all the sources that were used to write this book:
 
 1.  https://wiki.archlinux.org/title/Kernel
 2.  https://static.sched.com/hosted_files/osseu2020/f5/2020_ELCE_initcalls_myjosserand.pdf
+4.  https://www.linuxfromscratch.org/blfs/view/svn/postlfs/initramfs.html
+3.  https://en.wikipedia.org/wiki/Filesystem_Hierarchy_Standard

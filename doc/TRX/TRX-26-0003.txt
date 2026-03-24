@@ -1,11 +1,11 @@
-SERIAL SOUND CARD INTERFACE PROTOCOL
+                    SERIAL SOUND CARD INTERFACE PROTOCOL
                                 TRX-26-0003
                                 16/03/2026
 ---------------------------------------------------------------------------
 TITLE:          SERIAL SOUND CARD INTERFACE PROTOCOL
 ALSO KNOWN AS:  SSCIP
 DOCUMENT ID:    TRX-26-0003
-REVISION:       A1
+REVISION:       A2
 CATEGORY:       DESIGN AND PROTOCOL
 COPYRIGHTS:     (C) 2026 0x4248. CC BY-SA 4.0.
 USAGE RIGHTS:   All rights given under CC BY-SA 4.0
@@ -18,7 +18,8 @@ DATE REVISED:   16 March 2026
 REVISION HISTORY
 ---------------------------------------------------------------------------
 REVISION    DATE            NOTES
-A1          INSERT	    Initial creation of record.
+A1          16/03/2026      Initial creation of record.
+A2          24/03/2026      Added file type section and notes
 
 ---------------------------------------------------------------------------
 CONTENTS
@@ -86,20 +87,39 @@ connection
 
 NOTE: This does not block the host computer CPU.
 
+Note tone
+$<MODE><NOTE>\n
+
+Modes can be any of
+- " " - (None) Will do a square tone
+- s - Sine
+- z - Saw
+
+Note:
+Any musical note from C0 to C10
+
+Examples:
+$C4
+$A4
+$zD3
+
 1.3 Comments
 
 You can add a comment by appending a # to the start of the line.
 
-This can be useful for people sending a file into a device.
+This can be useful for people sending a file into a device and put various
+comments in to create sections.
 
+1.4 File Type
+
+Files that contain the notes or tones that are put into the sound card can 
+be stored with the `.sst` extention (Serial Sound Tones) 
 
 ---------------------------------------------------------------------------
 2.0  SIGNATURES
 ---------------------------------------------------------------------------
 
-Written By:       4248 Systems / 0x4248       Date: __________
-                
-                  Signature: _________________________
+Written By:       4248 Systems / 0x4248       Date: 24/03/2026
 
 
 Reviewed By:      _________________________   Date: __________

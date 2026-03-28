@@ -4,7 +4,10 @@ Welcome to the 0x4248 Linux Reference Manual. This manual is a very technical
 Linux Reference for practitioners working close to kernel internals, user-space
 interfaces, and Linux system behavior. 
 
-**This is NOT a beginner's manual.** 
+$$
+\color{red}
+\text{\huge{\textbf{{This is NOT a beginners's manual.}}}} \\
+$$
 
 If you are new to Linux, I strongly
 recommend starting with a more beginner-friendly resource, such as the
@@ -92,3 +95,5 @@ this manual, including text, images, and other media.
 - [Linux From Scratch](http://www.linuxfromscratch.org/)
 - [syscall.sh](https://syscall.sh/)
 - [man7.org](https://man7.org/)
+
+Huge thanks to the [All Things Linux](https://discord.gg/linux) for the welcoming and helpful community.

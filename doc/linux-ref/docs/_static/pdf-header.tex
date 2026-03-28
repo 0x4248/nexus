@@ -13,6 +13,22 @@
   }%
 }
 
+% Running header with book title
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textit{The 0x4248 Linux Systems Reference Manual}}
+\fancyhead[R]{\small\thepage}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0.4pt}
+% Keep plain style (chapter opening pages) consistent
+\fancypagestyle{plain}{%
+  \fancyhf{}
+  \fancyhead[L]{\small\textit{The 0x4248 Linux Systems Reference Manual}}
+  \fancyhead[R]{\small\thepage}
+  \renewcommand{\headrulewidth}{0.4pt}
+}
+
 % Make \paragraph (h5) and \subparagraph (h6) block-level headings
 \makeatletter
 \renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%

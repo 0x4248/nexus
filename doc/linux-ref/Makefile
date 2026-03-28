@@ -1,7 +1,7 @@
 PANDOC ?= pandoc
 BUILDDIR = build
 CSS = docs/_static/whitepaper.css
-TITLE = The 0x4248 Linux Reference Manual
+TITLE = The 0x4248 Linux Systems Reference Manual
 SUBTITLE = A reference for GNU/Linux on x86-64 systems
 AUTHOR = 0x4248
 BUILD_DATE = $(shell date -u +"%Y-%m-%d")

@@ -35,3 +35,34 @@ along with their support:
 | Unified kernel image | No   | Yes     | Yes     | Yes       | Firmware           |
 
 
+## What a bootloader does
+
+A bootloader is responsible for:
+
+1. Locating a kernel image on disk or other media
+2. Loading the kernel into memory
+3. Loading an initramfs (if present)
+4. Providing kernel command line arguments
+5. Transferring control to the kernel entry point
+
+On modern systems, the bootloader may also:
+
+- Provide a menu for selecting kernel versions
+- Handle multiple operating systems
+- Load additional modules or microcode updates
+
+## BIOS vs UEFI boot
+
+### BIOS (Legacy)
+
+- Uses MBR (Master Boot Record)
+- Bootloader resides in the first sectors of the disk
+- Limited space → multi-stage bootloaders (e.g. GRUB stage1/stage2)
+- 16-bit real mode at boot
+
+### UEFI
+
+- Uses EFI System Partition (ESP)
+- Bootloaders are regular `.efi` executables
+- Firmware can directly load the kernel (EFI stub)
+- No strict size limitations like MBR

@@ -19,3 +19,6 @@ Many thanks to all the sources that were used to write this book:
 2.  https://static.sched.com/hosted_files/osseu2020/f5/2020_ELCE_initcalls_myjosserand.pdf
 4.  https://www.linuxfromscratch.org/blfs/view/svn/postlfs/initramfs.html
 3.  https://en.wikipedia.org/wiki/Filesystem_Hierarchy_Standard
+4.  https://elixir.bootlin.com/linux/v6.19.8/source/include/linux/init.h#L45
+5.  https://www.kernel.org/doc/html/v4.14/admin-guide/kernel-parameters.html
+6.  https://wiki.archlinux.org/title/Kernel_parameters

@@ -198,7 +198,7 @@ which allows `make` to use all available cores for the build.
 
 I recommend using `ccache` to speed up subsequent builds. `ccache` is a compiler
 cache that stores the results of previous compilations and reuses them when the same
-compilation is requested again. This can significan notly reduce the build time for
+compilation is requested again. This can significantly speed up
 subsequent builds, especially when making small changes to the kernel configuration.
 To use `ccache`, you can set the `CC` environment variable to `ccache gcc` before
 

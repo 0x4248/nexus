@@ -113,7 +113,7 @@ comments in to create sections.
 1.4 File Type
 
 Files that contain the notes or tones that are put into the sound card can 
-be stored with the `.sst` extention (Serial Sound Tones) 
+be stored with the `.sst` extension (Serial Sound Tones) 
 
 ---------------------------------------------------------------------------
 2.0  SIGNATURES

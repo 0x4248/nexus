@@ -65,20 +65,25 @@ drwxr-xr-x 6 root root 4096 Mar 19 19:50 grub
 
 #### Vmlinuz
 
-Virtual Memory LINUx gZip. This is the compressed Linux kernel image. When the system boots, the
-bootloader loads this image into memory and decompresses it to start the operating system.
+Virtual Memory LINUx gZip. This is the compressed Linux kernel image. When the 
+system boots, the
+bootloader loads this image into memory and decompresses it to start the 
+operating system.
 
 #### RAM Disks
 
-A RAM disk is a virtual disk that resides in the system’s RAM. It is used during the boot process to
-provide a temporary root filesystem before the actual root filesystem is mounted. This allows the kernel
-to load necessary drivers and modules. This is because things like controller drivers for disks and other
+A RAM disk is a virtual disk that resides in the system’s RAM. It is used during 
+the boot process to provide a temporary root filesystem before the actual root 
+filesystem is mounted. This allows the kernel to load necessary drivers and 
+modules. This is because things like controller drivers for disks and other
 devices may not work without the RAM disk.
 
 ##### Types of RAM Disks
 
-- `initramfs`: This is the modern format for the initial RAM filesystem. It is a compressed CPIO
-archive that is loaded into memory and used as the initial root filesystem during boot.
+- `initramfs`: This is the modern format for the initial RAM filesystem. It 
+is a compressed CPIO
+archive that is loaded into memory and used as the initial root filesystem 
+during boot.
 - `initrd`: This is the older format for the initial RAM disk.
 
 Linux supports these compressions on the kernel and initramfs images:
@@ -92,9 +97,9 @@ Linux supports these compressions on the kernel and initramfs images:
 - `zstd`
 
 
-**Note**: The kernel can not load the initramfs if it is compressed with a compression algorithm that the
-kernel has not been compiled with support for. Ensure you enable support for the compression algorithm
-using `menuconfig`
+**Note**: The kernel can not load the initramfs if it is compressed with a 
+compression algorithm that the kernel has not been compiled with support for. 
+Ensure you enable support for the compression algorithm using `menuconfig`
 
 ### /dev
 

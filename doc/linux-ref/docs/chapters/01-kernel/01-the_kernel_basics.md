@@ -19,9 +19,9 @@ $$
 The kernel operates in a privileged mode called kernel space, while user 
 applications run in user space. Unlike older systems such as MS-DOS, the Linux 
 kernel enforces protection by controlling access to hardware and critical system 
-resources. User-space applications cannot directly access these resources; instead,
-they interact with the kernel through system calls, which provide a controlled 
-interface for requesting services.
+resources. User-space applications cannot directly access these resources; 
+instead, they interact with the kernel through system calls, which provide a 
+controlled interface for requesting services.
 
 ### Kernel design
 
@@ -35,7 +35,8 @@ specific needs.
 
 ## Kernel Branches
 
-*For more details about the kernel source code see the* **Kernel Source Code** *chapter.*
+*For more details about the kernel source code see the* **Kernel Source 
+Code** *chapter.*
 
 Across many Linux distributions, there are several kernel branches:
 
@@ -153,8 +154,8 @@ but this can be trivial and long. Many of the config names are abbreviated and
 not very descriptive. To make it easier to edit the configuration, you can use 
 `menuconfig` or `xconfig`.
 
-For this guide we will use `menuconfig` as it is more widely supported and allows
-for virtual console users to edit the configuration. 
+For this guide we will use `menuconfig` as it is more widely supported and 
+allows for virtual console users to edit the configuration. 
 
 You will need an X11 graphical environment. If you are using a virtual machine 
 using QEMU serial console, you will not be able to use `xconfig` and will need 
@@ -186,7 +187,8 @@ process. In this section we wont look too much into it now.
 
 Now that we have a configuration file, we can build the kernel. This is done
 using the `make` command. The kernel uses a custom build system that is based on
-`make`, but it has some additional features and optimizations. To build the kernel, you can simply run:
+`make`, but it has some additional features and optimizations. To build the 
+kernel, you can simply run:
 
 ```bash
 make -j$(nproc)

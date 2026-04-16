@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AFK</title>
+<style>
+    body {
+        margin: 0;
+        overflow: hidden;
+        background: black;
+    }
+    #afk {
+        position: absolute;
+        color: white;
+        font-size: 5em;
+        font-family: Arial, sans-serif;
+        opacity: 0;
+        transition: opacity 1s ease, transform 1s ease;
+        transform: translate(0, 0);
+        pointer-events: none;
+    }
+</style>
+</head>
+<body>
+
+<div id="afk">
+    <h1>AFK</h1>
+    <p>Will be back soon</p>
+</div>
+
+<script>
+const afk = document.getElementById('afk');
+
+function moveAFK() {
+    const rect = afk.getBoundingClientRect();
+
+    const maxX = window.innerWidth - rect.width;
+    const maxY = window.innerHeight - rect.height;
+
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
+
+    afk.style.transform = `translate(${x}px, ${y}px)`;
+}
+
+function loop() {
+    // fade out
+    afk.style.opacity = 0;
+
+    setTimeout(() => {
+        moveAFK();
+
+        // fade in after move
+        afk.style.opacity = 1;
+    }, 1000);
+}
+
+// initial placement
+moveAFK();
+afk.style.opacity = 1;
+
+// repeat cleanly
+setInterval(loop, 5000);
+</script>
+
+</body>
+</html>

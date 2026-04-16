@@ -1,0 +1,63 @@
+                    HYPER TEXT TRANSFER PROTOCOL 1.0
+                                TRX-26-0004
+                                01/04/2026
+---------------------------------------------------------------------------
+TITLE:          HYPER TEXT TRANSFER PROTOCOL 1.0
+DOCUMENT ID:    TRX-26-0004
+REVISION:       A1
+CATEGORY:       DESIGN AND PROTOCOL
+COPYRIGHTS:     (C) 2026 0x4248. CC BY-SA 4.0.
+USAGE RIGHTS:   All rights given under CC BY-SA 4.0
+LICENSE:        CC BY-SA 4.0
+
+DATE CREATED:   INSERT
+DATE REVISED:   INSERT
+
+THIS TRX IS A ALREADY STANDARDIZED PROTOCOL AND IS NOT CONTROLLED BY THE
+WRITER OF THIS TECHNICAL RECORD FILE.
+
+---------------------------------------------------------------------------
+REVISION HISTORY
+---------------------------------------------------------------------------
+REVISION    DATE            NOTES
+A1          04/01/2026	    Initial creation of record.
+
+---------------------------------------------------------------------------
+CONTENTS
+---------------------------------------------------------------------------
+
+1.0  INSERT
+2.0  REFERENCES
+3.0  SIGNATURES
+
+---------------------------------------------------------------------------
+ABSTRACT
+---------------------------------------------------------------------------
+
+Hyper Text Transfer Protocol (HTTP) is an application layer protocol for
+distributed, collaborative, hypermedia information systems. HTTP is the 
+foundation of data communication for the World Wide Web, where hypertext files
+are interlinked and accessed via the Internet.
+
+HTTP was developed in CERN in 1989 by Tim Berners-Lee and his team. It has since
+evolved through several versions and now is a solid standard for web
+communication.
+
+---------------------------------------------------------------------------
+1.0  
+---------------------------------------------------------------------------
+
+
+---------------------------------------------------------------------------
+2.0  REFERENCES
+---------------------------------------------------------------------------
+
+1. https://www.rfc-editor.org/rfc/rfc1945.txt
+2. https://www.rfc-editor.org/rfc/rfc2616.txt
+---------------------------------------------------------------------------
+3.0  SIGNATURES
+---------------------------------------------------------------------------
+
+Written By: 0x4248 <0x4248.dev> DD/MM/YYYY
+Reviewed By: INSERT DD/MM/YYYY
+Approved By: INSERT DD/MM/YYYY

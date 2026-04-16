@@ -97,5 +97,67 @@ Below is a short list of boot related parameters as a quick guide:
 - `init`: This parameter specifies the initial program that the kernel should 
 run after fully booting. By default, this is usually set to `/sbin/init`.
 - `initrd`: This parameter specifies the initial RAM disk (initrd) image that
-the kernel should use during the boot process. The initrd is a temporary file
-system that is loaded into memory and used by the kernel during the early stages of booting.
+the kernel should use during the boot process.
+- `cryptdevice`: This parameter is used to specify the encrypted block device
+- `debug`: Enable kernel debugging messages during boot.
+- `lsm`: Set the initialization order of the Linux Security Modules (LSMs).
+- `maxcpus`: Limit the number of CPUs that the SMP kernel will use during boot.
+- `mem`: Force a specific amount of memory to be used.
+- `netdev`: Network devices configuration.
+- `nomodeset`: Disable kernel mode setting.
+- `panic`: Time before automatic panic reset.
+- `quiet`: Hide kernel logs during boot.
+- `splash`: Enable splash screen during boot.
+- `resume`: Specify a swap device for hibernation resume.
+- `ro`: Mount the root filesystem as read-only during boot.
+- `rw`: Mount the root filesystem as read-write during boot.
+- `root`: The root filesystem to use and mount on boot.
+- `rootflags`: Additional flags for the root filesystem.
+- `systemd.unit`: Boot to a specified systemd target instead of the default.
+- `video`: Set the framebuffer configuration.
+
+## A deep dive into the Kernel Command Line
+
+*This section is a work in progress and may be incomplete*
+
+### Kernel startup subsystem
+
+### Audit
+
+```
+audit=<integer {0|1}>
+```
+
+Enable the kernel audit subsystem.
+
+- `audit=1`: Enable auditing.
+- `audit=0`: Disable auditing. *default*
+
+### Audit backlog limit
+
+```
+audit_backlog_limit=<integer>
+```
+
+Set the queue limit for the kernel audit subsystem. Defaults to `64`.
+
+### Boot delay
+
+```
+boot_delay=<integer>
+```
+
+Delays `printk` messages during the first seconds of boot. This can be useful
+for debugging and slowing down the boot speed to see what is going on as each
+hardware component is being initialized.
+
+Defaults to `0` which means no delay.
+
+### Boot memory debug
+
+```
+bootmem_debug
+```
+
+Enable boot memory debugging. 
+

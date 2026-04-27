@@ -1,4 +1,0 @@
-WWW
-===
-
-HTTP Related code

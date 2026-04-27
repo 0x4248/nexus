@@ -1,3 +1,0 @@
-# Tiny
-
-Tiny executable experiments.

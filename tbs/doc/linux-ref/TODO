@@ -1,0 +1,469 @@
+4248's Linux Reference Manual — Topic TODO
+==========================================
+
+Legend: [ ] not started  [~] in progress  [x] done
+
+────────────────────────────────────────────────────────────────────────────────
+KERNEL
+────────────────────────────────────────────────────────────────────────────────
+
+[ ] kernel/
+	[ ] boot/
+		[ ] 10-bootloaders-and-handoff.md
+			[ ] GRUB2 / systemd-boot / EFISTUB
+			[ ] how the bootloader passes control to the kernel
+			[ ] multiboot2 header
+		[ ] 20-early-init.md
+			[ ] head_64.S entry point
+			[ ] decompression stage
+			[ ] early ioremap and fixmaps
+		[ ] 30-init-process.md
+			[ ] PID 1 from kernel perspective
+			[ ] kernel_init thread
+			[ ] initramfs / initrd mounting
+		[ ] 40-kernel-parameters.md
+			[ ] /proc/cmdline
+			[ ] Documentation/admin-guide/kernel-parameters.txt map
+			[ ] __setup() and early_param() macros
+
+	[ ] cli-args/                                              [~ started: 10-kernel-command-line-overview.md]
+		[ ] 10-kernel-command-line-overview.md                 [~ draft]
+		[ ] 20-bootparam-reference.md
+			[ ] console=, root=, rw/ro, quiet, debug
+			[ ] module parameter passing (module.param=val)
+		[ ] 30-sysctl-vs-cmdline.md
+
+	[ ] memory/
+		[ ] 10-virtual-memory-layout.md
+			[ ] x86_64 canonical addresses
+			[ ] kernel vs userspace split (128 TB / 128 TB)
+			[ ] KASLR
+		[ ] 20-page-tables.md
+			[ ] PGD / P4D / PUD / PMD / PTE walk
+			[ ] huge pages (2 MB, 1 GB)
+			[ ] TLB shootdown
+		[ ] 30-slab-allocators.md
+			[ ] SLAB / SLUB / SLOB differences
+			[ ] kmalloc, vmalloc, kzalloc
+			[ ] /proc/slabinfo and slabtop
+		[ ] 40-mm-zones.md
+			[ ] ZONE_DMA, ZONE_DMA32, ZONE_NORMAL, ZONE_HIGHMEM
+			[ ] zone watermarks (min/low/high)
+		[ ] 50-oom-killer.md
+			[ ] oom_score and oom_adj
+			[ ] /proc/<pid>/oom_score_adj
+			[ ] oom_badness() selection logic
+		[ ] 60-huge-pages.md
+			[ ] THP (Transparent Huge Pages)
+			[ ] hugetlbfs
+			[ ] /sys/kernel/mm/hugepages/
+		[ ] 70-cma.md
+			[ ] Contiguous Memory Allocator
+			[ ] dma_alloc_contiguous
+
+	[ ] processes/
+		[ ] 10-task-struct.md
+			[ ] key fields: pid, tgid, mm, fs, files, signal
+			[ ] copy_process() on fork
+		[ ] 20-scheduling.md
+			[ ] CFS fundamentals (vruntime, weight)
+			[ ] SCHED_FIFO / SCHED_RR / SCHED_DEADLINE
+			[ ] nr_running, load average
+		[ ] 30-namespaces.md
+			[ ] pid, net, mnt, uts, ipc, user, cgroup, time
+			[ ] /proc/<pid>/ns/ symlinks
+			[ ] unshare(1) and unshare(2)
+		[ ] 40-cgroups.md
+			[ ] cgroup v1 vs v2 hierarchy
+			[ ] cpu, memory, blkio, pids controllers
+			[ ] /sys/fs/cgroup/
+		[ ] 50-signals.md
+			[ ] signal lifecycle and delivery
+			[ ] real-time signals SIGRTMIN–SIGRTMAX
+			[ ] /proc/<pid>/status SigBlk/SigPnd fields
+		[ ] 60-seccomp.md
+			[ ] seccomp-bpf filter
+			[ ] /proc/<pid>/status Seccomp field
+		[ ] 70-capabilities.md
+			[ ] capability sets: permitted/effective/inheritable/ambient/bounding
+			[ ] CAP_SYS_ADMIN and friends
+			[ ] getpcaps, capsh
+
+	[ ] syscalls/
+		[ ] 10-syscall-overview.md
+			[ ] syscall table (arch/x86/entry/syscalls/)
+			[ ] SYSCALL_DEFINE macros
+			[ ] vDSO and vsyscall
+		[ ] 20-key-syscalls.md
+			[ ] ioctl(2): encoding and direction bits
+			[ ] mmap(2): MAP_ANONYMOUS, MAP_SHARED, MAP_FIXED
+			[ ] epoll(7): level vs edge triggered
+			[ ] io_uring: SQ/CQ ring layout
+		[ ] 30-syscall-tracing.md
+			[ ] strace, ptrace internals
+			[ ] seccomp audit
+			[ ] perf trace
+
+	[ ] modules/
+		[ ] 10-module-anatomy.md
+			[ ] module_init / module_exit macros
+			[ ] THIS_MODULE, EXPORT_SYMBOL
+		[ ] 20-loading-and-linking.md
+			[ ] modprobe, insmod, rmmod
+			[ ] /proc/modules, lsmod
+			[ ] symbol versioning (MODVERSIONS)
+		[ ] 30-out-of-tree-builds.md
+			[ ] Kbuild for external modules
+			[ ] KERNELDIR / KDIR Makefile pattern
+
+	[ ] drivers/
+		[ ] 10-device-model.md
+			[ ] bus/device/driver trifecta
+			[ ] platform_driver, pci_driver registration
+			[ ] sysfs binding: /sys/bus/*/drivers/
+		[ ] 20-char-devices.md
+			[ ] cdev_init, cdev_add
+			[ ] file_operations struct
+			[ ] major/minor allocation (alloc_chrdev_region)
+		[ ] 30-interrupt-handling.md
+			[ ] request_irq, free_irq
+			[ ] top half vs threaded IRQ (IRQF_THREAD)
+			[ ] /proc/interrupts
+		[ ] 40-dma.md
+			[ ] coherent vs streaming DMA
+			[ ] dma_map_single, dma_alloc_coherent
+			[ ] IOMMU and DMA remapping
+
+	[ ] tracing-and-debug/
+		[ ] 10-ftrace.md
+			[ ] /sys/kernel/debug/tracing/
+			[ ] function_graph tracer
+			[ ] trace-cmd usage
+		[ ] 20-kprobes.md
+			[ ] kprobe / kretprobe
+			[ ] eBPF kprobe programs
+		[ ] 30-perf.md
+			[ ] perf stat, perf record, perf report
+			[ ] PMU events and raw perf_event_attr
+			[ ] perf annotate for hot paths
+		[ ] 40-kdump-and-kgdb.md
+			[ ] crash utility basics
+			[ ] /proc/vmcore
+			[ ] kgdb over serial / kgdb over ethernet (netpoll)
+
+
+────────────────────────────────────────────────────────────────────────────────
+DEVICE FILES AND /dev
+────────────────────────────────────────────────────────────────────────────────
+
+[ ] filesystems-and-device-nodes/                              [~ started: 01-filesystems-and-device-nodes.md]
+	[ ] 10-dev-overview.md                                     [~ draft]
+		[ ] major/minor numbers
+		[ ] udev rules and mdev
+	[ ] 20-notable-char-devices.md
+		[ ] /dev/null, /dev/zero, /dev/full, /dev/urandom, /dev/random
+		[ ] /dev/mem, /dev/kmem (and their restrictions)
+		[ ] /dev/tty, /dev/ptmx, /dev/pts/*
+		[ ] /dev/input/event*, /dev/input/mouse*
+		[ ] /dev/fb0 (framebuffer), /dev/dri/card* (DRM)
+		[ ] /dev/kvm
+		[ ] /dev/loop*, /dev/mapper/*
+		[ ] /dev/watchdog
+	[ ] 30-block-devices.md
+		[ ] /dev/sd*, /dev/nvme*, /dev/mmcblk*
+		[ ] partition naming
+		[ ] /sys/block/ relationship
+	[ ] 40-udev.md
+		[ ] udev rules syntax (KERNEL==, ATTR{}, RUN+=)
+		[ ] udevadm monitor, udevadm info
+		[ ] persistent naming rules
+
+
+────────────────────────────────────────────────────────────────────────────────
+PSEUDO FILESYSTEMS
+────────────────────────────────────────────────────────────────────────────────
+
+[ ] pseudo-fs/
+	[ ] 10-procfs.md
+		[ ] /proc/self, /proc/<pid>/ tree
+		[ ] /proc/meminfo field-by-field
+		[ ] /proc/net/* (tcp, udp, unix, dev)
+		[ ] /proc/sys/ hierarchy (same as sysctl)
+	[ ] 20-sysfs.md
+		[ ] sysfs as kernel object mirror
+		[ ] attribute files and kobject model
+		[ ] power management: /sys/devices/ power/
+	[ ] 30-debugfs.md
+		[ ] mounting debugfs
+		[ ] key subsystem nodes (drm, tracing, bdi)
+	[ ] 40-cgroup-fs.md
+		[ ] v1 multi-hierarchy vs v2 unified
+		[ ] delegating subtrees (cgroup.subtree_control)
+	[ ] 50-tmpfs-and-ramfs.md
+		[ ] tmpfs accounting and limits
+		[ ] /dev/shm as tmpfs
+	[ ] 60-bpffs.md
+		[ ] pinning eBPF maps and programs
+		[ ] /sys/fs/bpf/
+
+
+────────────────────────────────────────────────────────────────────────────────
+FILESYSTEMS
+────────────────────────────────────────────────────────────────────────────────
+
+[ ] filesystems/
+	[ ] 10-vfs.md
+		[ ] inode, dentry, superblock, file objects
+		[ ] VFS operations tables
+		[ ] dcache and icache
+	[ ] 20-ext4.md
+		[ ] extents vs indirect blocks
+		[ ] journal modes (journal, ordered, writeback)
+		[ ] tune2fs knobs
+	[ ] 30-xfs.md
+		[ ] allocation groups
+		[ ] delayed allocation
+		[ ] xfs_info, xfs_repair
+	[ ] 40-btrfs.md
+		[ ] CoW and subvolumes
+		[ ] RAID modes
+		[ ] btrfs send/receive
+	[ ] 50-overlayfs.md
+		[ ] lower/upper/work/merged layout
+		[ ] container image layers
+	[ ] 60-fuse.md
+		[ ] userspace filesystem protocol
+		[ ] libfuse request handling loop
+
+
+────────────────────────────────────────────────────────────────────────────────
+NETWORKING
+────────────────────────────────────────────────────────────────────────────────
+
+[ ] networking/
+	[ ] 10-socket-internals.md
+		[ ] sock struct and sk_buff lifecycle
+		[ ] socket options (SO_*, TCP_*, IP_*)
+		[ ] send/recv buffer tuning
+	[ ] 20-netfilter.md
+		[ ] hook points: PREROUTING, INPUT, FORWARD, OUTPUT, POSTROUTING
+		[ ] nftables rule structure
+		[ ] conntrack: /proc/net/nf_conntrack
+	[ ] 30-tc.md
+		[ ] qdiscs: fq, fq_codel, pfifo_fast, tbf
+		[ ] tc filter with BPF classifier
+		[ ] XDP: rx hook before netdev
+	[ ] 40-network-namespaces.md
+		[ ] ip netns, veth pairs
+		[ ] vrf and routing tables per ns
+	[ ] 50-tun-tap.md
+		[ ] TUN/TAP devices
+		[ ] /dev/net/tun usage
+		[ ] userspace VPN plumbing
+	[ ] 60-netlink.md
+		[ ] NETLINK_ROUTE / NETLINK_SOCK_DIAG
+		[ ] rtnetlink attribute encoding
+		[ ] iproute2 internals using netlink
+
+
+────────────────────────────────────────────────────────────────────────────────
+BLOCK I/O
+────────────────────────────────────────────────────────────────────────────────
+
+[ ] block/
+	[ ] 10-io-stack.md
+		[ ] bio and request structs
+		[ ] I/O schedulers: none, mq-deadline, kyber, bfq
+		[ ] /sys/block/<dev>/queue/scheduler
+	[ ] 20-io-accounting.md
+		[ ] /proc/<pid>/io
+		[ ] blkio cgroup controller
+		[ ] iostat, iotop internals
+	[ ] 30-nvme.md
+		[ ] NVMe queue pairs (submission/completion)
+		[ ] nvme cli management
+		[ ] nvme namespaces
+
+
+────────────────────────────────────────────────────────────────────────────────
+eBPF
+────────────────────────────────────────────────────────────────────────────────
+
+[ ] ebpf/
+	[ ] 10-overview.md
+		[ ] BPF ISA: registers, instructions, maps
+		[ ] verifier constraints
+		[ ] JIT and interpreted modes
+	[ ] 20-program-types.md
+		[ ] kprobe, tracepoint, perf_event
+		[ ] XDP, TC, cgroup_skb
+		[ ] lsm, fentry/fexit
+	[ ] 30-maps.md
+		[ ] hash, array, ringbuf, perf_event_array
+		[ ] map pinning via bpffs
+	[ ] 40-bpftool.md
+		[ ] bpftool prog / map / net inspection
+		[ ] BTF and CO-RE
+	[ ] 50-libbpf-skeleton.md
+		[ ] skel-based user space loader pattern
+
+
+────────────────────────────────────────────────────────────────────────────────
+BASH
+────────────────────────────────────────────────────────────────────────────────
+
+[ ] bash/                                                      [~ started: 10-bash-overview.md]
+	[ ] 10-bash-overview.md                                    [~ draft]
+	[ ] 20-expansions.md
+		[ ] brace, tilde, parameter, arithmetic, command sub, word splitting, glob
+		[ ] order of expansion stages
+	[ ] 30-parameter-internals.md
+		[ ] special vars: $*, $@, $#, $?, $!, $-, $$, $0
+		[ ] namerefs (declare -n)
+		[ ] arrays and associative arrays
+	[ ] 40-io-redirection.md
+		[ ] fd duplication: 2>&1, >&, <&-
+		[ ] process substitution <() >()
+		[ ] here-doc and here-string
+	[ ] 50-job-control.md
+		[ ] fg, bg, disown, wait
+		[ ] /proc/<pid>/fdinfo/ under the hood
+	[ ] 60-builtins-vs-externals.md
+		[ ] why type/which/command differ
+		[ ] hash table and PATH walk
+	[ ] 70-readline-and-inputrc.md
+	[ ] 80-scripting-patterns.md
+		[ ] error handling (set -euo pipefail)
+		[ ] trap cleanup patterns
+		[ ] lockfile and singleton techniques
+
+
+────────────────────────────────────────────────────────────────────────────────
+INIT AND SERVICE MANAGEMENT
+────────────────────────────────────────────────────────────────────────────────
+
+[ ] init/
+	[ ] 10-systemd-units.md
+		[ ] service, socket, timer, mount, device unit types
+		[ ] dependency ordering (Wants, After, Requires)
+		[ ] systemctl status internals (cgroup tree)
+	[ ] 20-systemd-journal.md
+		[ ] structured fields
+		[ ] journald socket protocol
+		[ ] journalctl filtering on _COMM= _PID= etc
+	[ ] 30-boot-target-sequence.md
+		[ ] default.target chain
+		[ ] rescue.target and emergency.target
+	[ ] 40-socket-activation.md
+		[ ] LISTEN_FDS protocol
+		[ ] sd_notify(3)
+
+
+────────────────────────────────────────────────────────────────────────────────
+SECURITY
+────────────────────────────────────────────────────────────────────────────────
+
+[ ] security/
+	[ ] 10-lsm.md
+		[ ] LSM hook architecture
+		[ ] stacking order (security_hook_heads)
+	[ ] 20-selinux.md
+		[ ] type enforcement: subject/object/permission
+		[ ] policy modules and audit2allow
+		[ ] /sys/fs/selinux/
+	[ ] 30-apparmor.md
+		[ ] profile syntax
+		[ ] aa-genprof, aa-logprof
+	[ ] 40-landlock.md
+		[ ] ruleset, filesystem and net access control
+		[ ] landlock_create_ruleset(2)
+	[ ] 50-kernel-hardening.md
+		[ ] SMEP, SMAP, CET, KPTI
+		[ ] KSPP config options
+		[ ] /proc/sys/kernel/kptr_restrict, dmesg_restrict
+
+
+────────────────────────────────────────────────────────────────────────────────
+HARDWARE INTERFACES
+────────────────────────────────────────────────────────────────────────────────
+
+[ ] hardware/
+	[ ] 10-pci-and-pcie.md
+		[ ] config space: vendor/device/BAR layout
+		[ ] lspci -vvv output walkthrough
+		[ ] /sys/bus/pci/devices/ attributes
+	[ ] 20-usb.md
+		[ ] transfer types: control, bulk, interrupt, isochronous
+		[ ] /sys/bus/usb/devices/ and usbfs
+		[ ] lsusb -v walkthrough
+	[ ] 30-acpi.md
+		[ ] DSDT / SSDT / FADT tables
+		[ ] acpidump + iasl decompile
+		[ ] /sys/firmware/acpi/
+	[ ] 40-gpio.md
+		[ ] character device gpio (/dev/gpiochip*)
+		[ ] libgpiod and gpioinfo
+	[ ] 50-i2c-and-spi.md
+		[ ] /dev/i2c-*, i2c-tools
+		[ ] /dev/spidev*, spidev ioctls
+	[ ] 60-cpu-topology.md
+		[ ] /sys/devices/system/cpu/ layout
+		[ ] NUMA: /sys/devices/system/node/
+		[ ] CPU hotplug
+
+
+────────────────────────────────────────────────────────────────────────────────
+VIRTUAL MACHINES AND CONTAINERS
+────────────────────────────────────────────────────────────────────────────────
+
+[ ] virt/
+	[ ] 10-kvm.md
+		[ ] /dev/kvm ioctls: KVM_CREATE_VM, KVM_CREATE_VCPU
+		[ ] VMCS / VMCB overview
+		[ ] EPT / NPT (nested page tables)
+	[ ] 20-containers.md
+		[ ] namespace + cgroup composition
+		[ ] /proc/<pid>/ns/ fd trick for re-entering
+		[ ] pivot_root vs chroot
+	[ ] 30-virtio.md
+		[ ] virtqueue split ring layout
+		[ ] virtio-blk, virtio-net, virtio-mem
+		[ ] vhost-user and DPDK path
+
+
+────────────────────────────────────────────────────────────────────────────────
+TOOLING REFERENCE
+────────────────────────────────────────────────────────────────────────────────
+
+[ ] tooling/
+	[ ] 10-binutils.md
+		[ ] objdump, readelf, nm, addr2line, size
+		[ ] ELF structure walkthrough
+	[ ] 20-gdb.md
+		[ ] kernel debugging with gdb + vmlinux
+		[ ] QEMU + gdb stub
+		[ ] crash scripting with gdb
+	[ ] 30-sparse-and-coccinelle.md
+		[ ] sparse annotations: __user, __iomem, __must_check
+		[ ] Coccinelle semantic patch basics
+	[ ] 40-kconfig-and-kbuild.md
+		[ ] Kconfig syntax: bool, tristate, depends on, select
+		[ ] Kbuild obj-y / obj-m mechanics
+		[ ] make menuconfig, allmodconfig, tinyconfig
+
+
+────────────────────────────────────────────────────────────────────────────────
+APPENDIX
+────────────────────────────────────────────────────────────────────────────────
+
+[ ] appendix/
+	[ ] 10-syscall-table.md
+		[ ] x86_64 syscall table (annotated)
+	[ ] 20-errno-reference.md
+		[ ] full errno list with common kernel context
+	[ ] 30-ioctl-encoding.md
+		[ ] _IO, _IOR, _IOW, _IOWR macros
+		[ ] direction and size bit layout
+	[ ] 40-glossary.md
+		[ ] kernel / systems jargon A–Z
+

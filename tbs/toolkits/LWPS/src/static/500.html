@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>500 Internal Server Error</title>
+        <style>
+            *{
+                font-family: monospace;
+                background-color: #1e1e1e;
+                color: #d4d4d4;
+            }
+
+            h1{ color: #f44747; }
+
+            .footer{
+                text-align: center;
+                font-size: small;
+                margin-top: 2em;
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                margin-bottom: 1em;
+            }
+
+            .footer i, .footer hr{
+                color: #828282;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>500 Internal Server Error</h1>
+        <i>LWPS encountered an error, showing STDERR:</i>
+        <hr>
+        <code>{{error}}</code>
+
+        <div class="footer">
+            <hr>
+            <i>Powered by Lightweight PHP Server (LWPS)</i>
+            <br>
+            <i>© 2026 0x4248 and contributors</i>
+        </div>
+    </body>
+</html>

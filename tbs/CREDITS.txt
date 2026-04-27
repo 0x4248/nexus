@@ -1,0 +1,382 @@
+                                0x4248 CREDITS
+
+Here contains most credits for the libraries, help and people that helped. This
+includes 0x4248.dev, 0x4248 Nexus, 4248 Music, and 4248 Media. It is
+formatted similar to the linux CREDITS file.
+
+This file is in two main sections: Companies & Groups, and then People
+
+The fields are Library name (L), Name of person or company who made the library
+(N), Copyright or license (C), Website (W), Description (D), Address (A)
+
+-----------------------------------[ BEGIN ]-----------------------------------
+
+L: SDL
+N: Sam Lantinga
+C: Zlib license
+D: Simple DirectMedia Layer
+W: https://www.libsdl.org/
+
+L: OpenGL
+N: Khronos Group
+W: https://opengl.org/
+W: https://www.khronos.org/opengl/
+
+L: Collada
+N: Khronos Group
+W: https://www.khronos.org/collada/
+
+L: gLTF
+N: Khronos Group
+W: https://www.khronos.org/gltf/
+
+L: Vulkan
+N: Khronos Group
+W: https://www.vulkan.org/
+
+L: Linux Kernel
+N: Linus Torvalds
+C: GPL 2.0 Only
+W: https://kernel.org/
+A: Helsinki
+A: Finland
+
+L: Git
+N: Linus Torvalds
+C: GPL 2.0 Only
+W: https://git-scm.com/
+A: Helsinki
+A: Finland
+
+L: Blender
+N: Blender Foundation
+C: GNU GPL 2.0 or later
+W: https://www.blender.org/
+D: 3D Creation Suite
+
+L: OpenEXR
+N: Industrial Light & Magic
+C: BSD License
+W: https://www.openexr.com/
+D: High Dynamic Range Image File Format
+
+L: Python
+N: Python Software Foundation
+C: Python Software Foundation License
+W: https://www.python.org/
+D: Programming Language
+
+L: GNU GCC
+N: Free Software Foundation
+C: GNU GPL 3.0 or later
+W: https://gcc.gnu.org/
+D: GNU Compiler Collection
+
+L: GNU Binutils
+N: Free Software Foundation
+C: GPL 3.0 Only
+D: GNU binary utilities including ld, as, objdump, nm, etc.
+W: https://www.gnu.org/software/binutils/
+
+L: ImGui
+N: Omar Cornut
+C: MIT License
+W: https://github.com/ocornut/imgui
+D: Immediate Mode GUI library
+
+L: FFmpeg
+N: FFmpeg Team
+C: LGPL 2.1 or GPL 2.0
+W: https://ffmpeg.org/
+D: Multimedia framework
+
+L: Dear ImGui
+N: Omar Cornut
+C: MIT License
+W: https://github.com/ocornut/imgui
+D: Immediate Mode GUI library
+
+L: Lua
+N: Lua.org, PUC-Rio
+C: MIT License
+W: https://www.lua.org/
+D: Lightweight scripting language
+
+L: Ruby
+N: Yukihiro Matsumoto
+C: Ruby License / BSD
+W: https://www.ruby-lang.org/
+D: Programming language
+
+L: CMake
+N: Kitware
+C: BSD 3-Clause License
+W: https://cmake.org/
+D: Build system generator
+
+L: GNU Make
+N: Free Software Foundation
+C: GNU GPL 3.0 or later
+W: https://www.gnu.org/software/make/
+D: Build automation tool
+
+L: GNU C Library (glibc)
+N: Free Software Foundation
+C: GNU LGPL 2.1 or later
+W: https://www.gnu.org/software/libc/
+D: GNU C standard library
+
+L: Clang
+N: LLVM Project
+C: Apache License 2.0 with LLVM exception
+W: https://clang.llvm.org/
+D: C language family compiler frontend
+
+L: GNU Coreutils
+N: Free Software Foundation
+C: GNU GPL 3.0 or later
+W: https://www.gnu.org/software/coreutils/
+D: GNU core command-line utilities
+
+L: BusyBox
+N: BusyBox Team
+C: GPL 2.0 Only
+W: https://busybox.net/
+D: Single-binary collection of Unix utilities
+
+L: GFortran
+N: Free Software Foundation
+C: GNU GPL 3.0 or later
+W: https://gcc.gnu.org/fortran/
+D: GNU Fortran compiler
+
+L: FLAC
+N: Xiph.Org Foundation
+C: BSD License
+W: https://xiph.org/flac/
+D: Free lossless audio codec
+
+L: zlib
+N: Jean-loup Gailly, Mark Adler
+C: zlib License
+W: https://zlib.net/
+D: Compression library
+
+L: libarchive
+N: Tim Kientzle
+C: BSD License
+W: https://www.libarchive.org/
+D: Multi-format archive and compression library
+
+L: NASM
+N: NASM Development Team
+C: BSD License
+W: https://www.nasm.us/
+D: Netwide Assembler
+
+L: OpenSSL
+N: OpenSSL Software Foundation
+C: Apache License 2.0
+W: https://www.openssl.org/
+D: Cryptography and SSL/TLS toolkit
+
+L: Autoconf
+N: Free Software Foundation
+C: GNU GPL 3.0 or later
+W: https://www.gnu.org/software/autoconf/
+D: Automatic configure script builder
+
+L: Boost
+N: Boost Community
+C: Boost Software License 1.0
+W: https://www.boost.org/
+D: C++ Libraries Collection
+
+L: OpenH264
+N: Cisco Systems
+C: BSD License
+W: https://www.openh264.org/
+D: H.264 video codec implementation
+
+L: GLFW
+N: GLFW Development Team
+C: zlib License
+W: https://www.glfw.org/
+D: Window and context creation library
+
+L: LWJGL
+N: LWJGL Team
+C: BSD License
+W: https://www.lwjgl.org/
+D: Lightweight Java Game Library
+
+L: Xorg
+N: X.Org Foundation
+C: MIT License
+W: https://www.x.org/
+D: X Window System implementation
+
+L: QEMU
+N: QEMU Project
+C: GPL 2.0 Only
+D: Generic and open source machine emulator and virtualizer
+W: https://www.qemu.org/
+
+L: SeaBIOS
+N: SeaBIOS Project
+C: LGPL 3.0 Only
+D: Open-source implementation of a 16-bit x86 BIOS
+W: https://www.seabios.org/
+
+L: U-Boot
+N: Das U-Boot / DENX Software Engineering
+C: GPL 2.0 Only
+D: Universal bootloader for embedded systems
+W: https://www.denx.de/wiki/U-Boot
+
+L: glslang
+N: Khronos Group
+C: Apache 2.0
+D: Reference GLSL to SPIR-V compiler
+W: https://github.com/KhronosGroup/glslang
+
+L: bzip2
+N: Julian Seward
+C: BSD-like license
+D: High-quality data compressor
+W: https://sourceware.org/bzip2/
+
+L: libcurl
+N: Daniel Stenberg / curl project
+C: MIT License
+D: Multiprotocol file transfer library
+W: https://curl.se/libcurl/
+
+L: OpenJDK
+N: Oracle / OpenJDK Community
+C: GPL 2.0 with Classpath Exception
+D: Open-source Java platform implementation
+W: https://openjdk.org/
+
+L: SQLite
+N: D. Richard Hipp
+C: Public Domain
+D: Embedded SQL database engine
+W: https://sqlite.org/
+
+L: VICE
+N: VICE Team
+C: GPL 2.0 Only
+D: Versatile Commodore Emulator
+W: http://vice-emu.sourceforge.net/
+
+L: Commodore 64 / 128 / Amiga
+N: Commodore International
+C: Closed source
+D: 8-Bit and 16-Bit computers
+
+L: ARM Architecture
+N: ARM Ltd.
+C: Various licenses
+W: https://www.arm.com/
+
+L: Raspberry Pi 4 & 5
+N: Raspberry Pi Foundation
+C: Various licenses
+D: Single-board computers
+W: https://www.raspberrypi.com/
+
+L: Raspberry Pi Pico
+N: Raspberry Pi Foundation
+C: Various licenses
+D: Micro-controller
+W: https://www.raspberrypi.com/
+
+L: Intel
+N: Intel Corporation
+C: Various licenses
+D: CPU and chipset technologies
+W: https://www.intel.com/
+
+L: Qualcomm Atheros (Wi-Fi Cards)
+N: Qualcomm Incorporated
+C: Various licenses
+D: Wireless networking chipsets used for system testing
+W: https://www.qualcomm.com/
+
+L: Arduino
+N: Arduino LLC / Arduino SRL
+C: LGPL 2.1 / GPL 2.0
+D: Micro-controller
+W: https://www.arduino.cc/
+
+L: Firefox
+N: Mozilla Foundation
+C: MPL 2.0
+W: https://www.mozilla.org/firefox/
+D: Web browser
+
+L: HTTP
+N: CERN
+D: HyperText Transfer Protocol, web standard
+C: Various permissive licenses / public domain origins
+W: https://home.cern/
+
+L: HTML5
+N: WHATWG
+D: HyperText Markup Language, web standard
+C: Various permissive licenses / public domain origins
+W: https://whatwg.org/
+
+L: Zed
+N: Zed Industries
+C: Various open-source licenses (including MIT/Apache)
+W: https://zed.dev/
+D: Code editor
+
+L: Arch Linux
+N: Arch Linux Team
+C: GPL and other free software licenses
+W: https://archlinux.org/
+D: Linux distribution
+
+L: Debian
+C: GPL and other free software licenses
+W: https://www.debian.org/
+D: Linux distribution
+
+L: MS-DOS
+N: Microsoft
+C: Proprietary
+W: https://www.microsoft.com/
+
+L: Floppy Disk
+N: IBM
+W: https://www.ibm.com/
+D: 8-inch floppy disk
+
+------------------------------------[ DOCS ]------------------------------------
+
+L: DevDocs
+D: API Documentation Browser
+N: Thibaut Courouble
+W: https://devdocs.io
+
+N: Cpp Reference
+D: C And C++ Documentation
+W: https://cppreference.com
+
+-----------------------------------[ PEOPLE ]-----------------------------------
+
+N: Acetheking987 / Alfie King
+D: Various patches
+W: https://alfieking.dev/
+A: United Kingdom
+
+N: Sparky
+D: Music / Production & Mixing
+D: Various patches
+W: https://eevee658.vercel.app/
+A: United Kingdom
+
+------------------------------------[ END ]------------------------------------

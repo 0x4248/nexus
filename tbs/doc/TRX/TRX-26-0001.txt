@@ -1,0 +1,183 @@
+                    TECHNICAL RECORD EXCHANGE INTRODUCTION
+                                TRX-26-0001
+                                04/03/2026
+---------------------------------------------------------------------------
+TITLE:          TECHNICAL RECORD EXCHANGE INTRODUCTION
+DOCUMENT ID:    TRX-26-0001-A1
+REVISION:       A1
+CATEGORY:       DESIGN AND PROTOCOL
+COPYRIGHTS:     (C) 2026 0x4248. CC BY-SA 4.0.
+USAGE RIGHTS:   All rights given under CC BY-SA 4.0
+LICENSE:        CC BY-SA 4.0
+
+DATE CREATED:   4 March 2026
+DATE REVISED:   4 March 2026
+
+---------------------------------------------------------------------------
+REVISION HISTORY
+---------------------------------------------------------------------------
+REVISION    DATE            NOTES
+A1          4 March 2026    Initial creation of record.
+
+---------------------------------------------------------------------------
+CONTENTS
+---------------------------------------------------------------------------
+
+1.0  SCOPE
+2.0  TRX NUMBERING SYSTEM
+3.0  DOCUMENT FORMAT REQUIREMENTS
+4.0  SIGNATURES
+
+---------------------------------------------------------------------------
+ABSTRACT
+---------------------------------------------------------------------------
+
+Introducing the new 4248 Systems Technical Record Exchange (TRX) format. A
+standardized format for sharing and archiving technical records such as design
+proposals, technical documentation, and project reports and other technical
+documents. TRX is designed to be simple to track, write, read and share. With
+each record being assigned a unique identifier and revision code.
+
+This makes TRX ideal for long term archiving and sharing over the old DPX 
+letter like format.
+
+---------------------------------------------------------------------------
+1.0  SCOPE
+---------------------------------------------------------------------------
+
+1.1  This standard applies to all technical memoranda, engineering notes,
+     research reports, data compilations, and internal communications
+     formally issued under the TRX designation.
+
+1.2  The TRX numbering system shall be applied to all controlled
+     technical documents intended for archival retention.
+
+----------------------------------------------------------------------------
+2.0  TRX NUMBERING SYSTEM
+---------------------------------------------------------------------------
+
+TRX uses a structured numbering system to uniquely identify each record.
+The format is as follows:
+TRX-YY-NNNN-R
+
+Where:
+- TRX: The prefix indicating the document is part of the Technical
+       Record Exchange.
+- YY: The last two digits of the year the record was 
+      created (e.g.. 26 for 2026).
+- NNNN: A sequential four-digit number assigned to each record.
+- R: A revision code (e.g.. A, B, C, etc.) indicating the version of the
+     document. It can also be a letter followed by a number for minor
+     revisions (e.g.. A1, A2, etc.).
+
+This allows for a simple way to track and reference documents, with the year
+providing context for when the record was created. If the record count ends 
+close to 9999 in a year, the sequential number can reset on new years day.
+
+This is unlikely since I don't expect to write 10k documents.
+
+---------------------------------------------------------------------------
+3.0  DOCUMENT FORMAT REQUIREMENTS
+---------------------------------------------------------------------------
+
+3.1 BASIC GUIDELINES
+
+Documents following the TRX format should adhere to the following guidelines:
+- Use a clear and concise title that reflects the content of the document.
+- Include a unique TRX identifier and revision code on the cover page.
+- Provide an abstract summarizing the key points of the document.
+- Use a consistent structure with sections and subsections as needed.
+- Include a revision history table to track changes over time.
+- Use clear and professional language, avoiding jargon where possible.
+- Include references to any sources or related documents.
+- Ensure that all figures, tables, and data are properly labeled and referenced
+  in the text.
+
+3.2 FILE FORMAT
+
+The document should begin with a easy to read header, no nonsense formatting. 
+Just use the tab key, works in almost every typewriter and IBM Compatible
+computer. The document should be saved in a widely compatible format such as
+plain text (.txt). Non editable formats can be used but only for sharing and not
+for the official copy. Post script should be used for printing to keep the
+font and formatting consistent across different printers.
+
+Any 80 col dot matrix printer can print the document without any formatting
+this is because of how well the format is designed to be compatible with old and
+new technology.
+
+3.3 HEADERS
+
+A brilliant example is already in this document, go to page 1. Here is a list of
+the fields you can use:
+- TITLE: The title of the document.
+- DOCUMENT ID: The unique identifier for the document following the TRX numbering
+    system.
+- REVISION: The revision code for the document.
+- CATEGORY: The category or type of document (e.g.. Design and Protocol, Report
+            Experimental Results, you name it!).
+- COPYRIGHTS: The copyright information for the document, including the year and
+              the author or organization.
+- USAGE RIGHTS: A brief statement of the usage rights for the document, such as
+                "All rights given under CC BY-SA 4.0".
+- LICENSE: The specific license under which the document is released (e.g.. CC
+              BY-SA 4.0).
+- DATE CREATED: The date the document was originally created.
+- DATE REVISED: The date of the most recent revision to the document.
+
+Optional fields include:
+- AUTHORS: A list of the authors who contributed to the document.
+- AFFILIATIONS: The affiliations of the authors (e.g.. 4248 Systems,
+                    University of Somewhere, etc.).
+- KEYWORDS: A list of keywords relevant to the content of the document for
+            indexing and search purposes.
+- SUMMARY: A brief summary of the document's content, similar to the abstract
+           but can be more detailed and include specific findings or conclusions.
+- RELATED RECORDS: A list of related TRX records that are relevant to the 
+                   content of the document, including their TRX identifiers
+                   for easy reference.
+- PRECEDES: A list of TRX records that this design improves upon or is based on,
+            including their TRX identifiers for easy reference.
+
+These should be put into a heading like format:
+- ABSTRACT: A brief summary of the document's content and purpose.
+- CONTENTS: A list of the main sections and subsections of the document.
+
+3.4  REVISION HISTORY
+
+A revision history table should be included to track changes to the document
+over time. The table should include the following columns:
+- REVISION: The revision code (e.g.. A, B, C, etc.)
+- DATE: The date of the revision.
+- NOTES: A brief description of the changes made in the revision.
+
+
+3.5  FIGURES AND DATA
+
+Since its not the best idea to put images in text files, you should save any
+relating files in the same folder as the document and reference them in the 
+text.
+
+For example:
+"For a visual representation of the sine wave, see [SIN_WAVE_GRAPH.PNG]"
+
+Files are linked as [FILENAME.EXTENSION].
+
+3.6  REFERENCING RECORDS
+
+When referencing other TRX records, use the full TRX identifier for clarity.
+For example:
+"As discussed in TRX-25-234545-A1, the design proposal for..."
+
+---------------------------------------------------------------------------
+4.0  SIGNATURES
+---------------------------------------------------------------------------
+
+Written By:       _________________________   Date: __________
+                
+                  Signature: _________________________
+
+
+Reviewed By:      _________________________   Date: __________
+                
+                  Signature: _________________________

@@ -1,0 +1,3 @@
+NB-ROOT = usr
+NBUILD-T += $(NB-ROOT)/key_detect
+NBUILD-T += $(NB-ROOT)/vishash

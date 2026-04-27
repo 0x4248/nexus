@@ -1,0 +1,19 @@
+Root Guard
+===========
+
+What is Root Guard?
+----------------------
+Root Guard is a simple library to quickly inject a root user check into C/C++ sbin
+programs. It does several checks to determine if the program is being run by the
+root user or even by a user with root privileges.
+Since just checking the UID isnt always enough, Root Guard performs multiple
+checks.
+
+Root Guard can be used anywhere as a static binary.
+
+rg <COMMAND> 
+
+This works in the same way as sudo does, you can even run sudo with it to check
+for root privileges.
+
+sudo rg whoami

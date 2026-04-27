@@ -1,0 +1,40 @@
+JunkRef
+=======
+
+An easy way to pull from 0x4248/JunkDrawer and other sources without the hassle.
+
+.junkref files
+--------------
+
+Modes:
+    -       Option
+    /       Fetch from junkref
+    http    Fetch from a hyper text transfer site
+    https   Fetch from a hyper text transfer secure site
+    &       Unzip file
+    *       Print message
+    #       Comment/Skip line
+
+
+Example:
+
+
+# Tell Junkref not to update gitignore for this run
+-ngit
+
+#Create the test dir
+@tests/
+
+#Lets copy the test image
+/misc/btest/32btest.bmp>tests/img.bmp
+
+# Downloading files demo
+# Junkref will detect the URL and download files for you with the specified location
+
+*Downloading file from example.com
+https://example.com>out.zip
+
+# Unzipping files
+
+*Now unzipping
+&out.zip

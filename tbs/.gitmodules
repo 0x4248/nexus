@@ -1,0 +1,12 @@
+[submodule "ext/glfw"]
+	path = ext/glfw
+	url = https://github.com/glfw/glfw.git
+[submodule "ext/SDL"]
+	path = ext/SDL
+	url = https://github.com/libsdl-org/SDL
+[submodule "ext/kconfiglib"]
+	path = ext/kconfiglib
+	url = https://github.com/ulfalizer/Kconfiglib.git
+[submodule "ext/SDL2"]
+	path = ext/SDL2
+	url = https://github.com/davidsiaw/SDL2

@@ -1,0 +1,29 @@
+menu "Makefile options"
+
+config MAKEFILE_TRACE
+    bool "Trace mode"
+    default n
+    help
+      Prints everything the makefile does
+
+config MAKEFILE_LOGS
+    bool "Log mode"
+    default n
+    help
+      Prints a log message to explain what it is doing
+
+config CONFIG_MAKE_IGNORE_WARNING_DARWIN
+    bool "Ignore MacOS warning"
+    default n
+    help
+        Hides the MacOS warning
+endmenu
+
+menu "Documentation"
+
+config DOCS_MAN_MODE
+    bool "Manual format reader"
+    default y
+    help
+      Converts the markdown and text documentation into manual format pages
+endmenu

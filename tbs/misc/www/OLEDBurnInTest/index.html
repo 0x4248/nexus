@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>OLED Burn in test</title>
+        <style>
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+            }
+
+            .center {
+                margin: 0;
+                text-align: center;
+            }
+
+            .fadeTest {
+                animation: fade 5s infinite linear;
+            }
+
+            .black {
+                background-color: #000;
+                color: #fff;
+            }
+
+            .pct-1 {
+                background-color: #111;
+                color: #fff;
+            }
+
+            .pct-2 {
+                background-color: #222;
+                color: #fff;
+            }
+
+            .pct-3 {
+                background-color: #333;
+                color: #fff;
+            }
+
+            .pct-4 {
+                background-color: #444;
+                color: #fff;
+            }
+
+            .pct-9 {
+                background-color: #999;
+                color: #000;
+            }
+
+            .pct-f {
+                background-color: #fff;
+                color: #000;
+            }
+
+            @keyframes fade {
+                0% {
+                    background-color: #000;
+                    color: white;
+                }
+                80% {
+                    background-color: #333;
+                    color: white;
+                }
+                81% {
+                    color: black;
+                }
+                100% {
+                    background-color: #555;
+                    color: black;
+                }
+            }
+        </style>
+    </head>
+    <body id="body">
+        <div class="center">
+            <br style="margin-top: 10%" />
+            <h1>OLED Burn in test</h1>
+            <p>By 0x4248</p>
+            <button onclick="setTest('fadeTest')">Fade test</button>
+            <button onclick="setTest('black')">Black</button>
+            <button onclick="setTest('pct-1')">%10</button>
+            <button onclick="setTest('pct-2')">%20</button>
+            <button onclick="setTest('pct-3')">%30</button>
+            <button onclick="setTest('pct-4')">%40</button>
+            <button onclick="setTest('pct-9')">%90</button>
+            <button onclick="setTest('pct-f')">%FF</button>
+        </div>
+    </body>
+    <script>
+        function setTest(name) {
+            document.getElementById("body").className = name;
+        }
+    </script>
+</html>

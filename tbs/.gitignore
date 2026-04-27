@@ -1,0 +1,111 @@
+# SPDX-License-Identifier: GPL-3.0
+# Nexus
+#
+# .gitignore
+#
+# COPYRIGHT NOTICE
+# Copyright (C) 2024-2026 0x4248 and contributors
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the license is not changed.
+#
+# This software is free and open source. Licensed under the GNU general
+# public license version 3.0 as published by the Free Software Foundation.
+
+
+# Ok so whats going on here, seems pretty crazy, I know. Well I thought that
+# using whitelists would be much easier to manage. Kernel kinda does this but
+# only whitelisting dotfiles, I just took it the crazy route
+
+*.*
+
+# DOTFILES
+!.gitignore
+!.gitmodules
+!.junkref
+!.init
+!.project
+!.defconfig
+!.vscode/
+!.github/
+
+# DIRS TO IGNORE
+build/
+bin/
+appdata/
+AppData/
+__pycache__/
+pages/
+__cmake_systeminformation/
+
+#### ALWAYS IGNORE ####
+COMMIT_MSG.txt
+COMMIT_MSG.old
+
+##### SORT THIS ####
+# NONE
+##### SORT THIS ####
+
+# TEXT
+!README
+!*.txt
+!*.md
+!*.tex
+!*.msg
+
+# CONFIG
+!*.conf
+!*.ref
+!*.toml
+!*.yml
+!*.ld
+
+### SOURCE FILLES ###
+# C
+!*.c
+!*.h
+!*.C
+!*.H
+
+# C++
+!*.cpp
+!*.CPP
+!*.c++
+!*.hpp
+!*.h++
+
+# ARDUINO
+!*.ino
+
+# OPENGL
+!*.glsl
+!*.vert
+!*.frag
+
+# JAVA
+!*.java
+
+# FORTRAN
+!*.f90
+
+# ASM
+!*.s
+!*.S
+!*.asm
+
+# CMAKE
+!*.cmake
+
+# MAKE
+!Makefile
+!*.mk
+
+# WWW
+!*.html
+!*.css
+
+### SCRIPTS ###
+!*.py
+!*.sh
+!*.bash
+!*.fish
+!*.php

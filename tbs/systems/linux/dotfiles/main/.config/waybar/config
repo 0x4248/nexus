@@ -1,0 +1,26 @@
+{
+  "layer": "top",
+  "position": "top",
+  "modules-left": ["sway/workspaces", "custom/clock"],
+  "modules-center": ["custom/uptime", "memory"],
+  "modules-right": ["pulseaudio", "battery", "network"],
+
+  "sway/workspaces": {
+    "disable-scroll": true
+  },
+
+  "custom/clock": {
+    "exec": "date",
+    "interval": 1
+  },
+
+  "memory": {
+    "format": "{used} / {total} MB"
+  },
+
+  "custom/uptime": {
+    "exec": "uptime -p",
+    "interval": 30
+  }
+}
+

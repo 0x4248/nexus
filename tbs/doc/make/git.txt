@@ -1,0 +1,4 @@
+GIT TARGETS
+------------
+    g-log       - Prints git log
+    g-acp       - Adds all changes, commits and pushes

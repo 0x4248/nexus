@@ -1,0 +1,31 @@
+return
+======
+
+Returning 0 from main using basic assembly
+
+Source code structure
+---------------------
+
+In the program we only run three instructions
+
+
+We first move the value 60 to the rax register, this will tell linux that we
+want to exit the program.
+
+	mov rax, 60
+
+We then move the value 0 to the rdi register, this is the argument that we pass
+into the exit syscall. The RDI register stores the code that's being used to exit.
+
+	mov rdi, 0
+
+We then run the syscall instruction to exit the program.
+
+	syscall
+
+The program will return 0 to the shell. We can confirm this by running the
+program and then using echo $? to see the return value.
+
+
+	./return
+	echo $?

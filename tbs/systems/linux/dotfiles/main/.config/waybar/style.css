@@ -1,0 +1,31 @@
+/* General bar */
+* {
+    background: #1a1a1a;
+    color: #e6e6e6;
+    font-family: "Departure Mono", monospace;
+    font-size: 12px;
+}
+
+/* Active workspace */
+#workspaces button.active {
+    background: #222222;
+    color: #7a7a7a;
+}
+
+/* Inactive workspace */
+#workspaces button {
+    background: #1a1a1a;
+    color: #3c3c3c;
+    border-right: 1px solid  #3c3c3c;
+}
+
+/* Hover effect */
+button:hover {
+    background: #3c3c3c;
+}
+
+/* Modules */
+#clock, #memory, #battery, #network {
+    padding: 0 8px;
+}
+

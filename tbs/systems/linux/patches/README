@@ -1,0 +1,17 @@
+PATCHES
+=======
+
+This directory contains many of my patches that i have made using diff, you can
+apply them using the coreutils command "patch" 
+
+USAGE:
+
+patch -p1 < PATCH.FILE
+
+HOW I MAKE THEM:
+
+diff -u old.file new.file > output.patch
+
+DIR:
+
+diff -urN olddir/ newdir/ > output.patch

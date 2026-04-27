@@ -1,0 +1,235 @@
+4248's Linux Reference Manual — Sources & References
+======================================================
+     
+Primary sources are marked (*)  — these should be checked first for any topic.
+The kernel source tree is the ultimate ground truth for everything.
+
+────────────────────────────────────────────────────────────────────────────────
+KERNEL SOURCE AND OFFICIAL DOCUMENTATION
+────────────────────────────────────────────────────────────────────────────────
+
+(*) Linux kernel source tree
+    https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+    https://github.com/torvalds/linux
+    - arch/x86/entry/                  syscall entry, vDSO
+    - arch/x86/mm/                     page tables, KASLR
+    - kernel/sched/                    CFS, RT, deadline schedulers
+    - kernel/signal.c                  signal delivery internals
+    - mm/                              all memory management subsystems
+    - net/                             full networking stack
+    - drivers/                         all driver subsystems
+    - fs/                              VFS and filesystem implementations
+    - security/                        LSM, SELinux, AppArmor, Landlock
+    - include/uapi/                    userspace-visible kernel headers
+
+(*) Kernel documentation (built from source, also online)
+    https://www.kernel.org/doc/html/latest/
+    - admin-guide/kernel-parameters.txt     all boot parameters
+    - admin-guide/mm/                       memory management admin docs
+    - core-api/                             core kernel API reference
+    - driver-api/                           driver subsystem APIs
+    - filesystems/                          per-filesystem documentation
+    - networking/                           net stack documentation
+    - bpf/                                  eBPF subsystem
+    - trace/                                ftrace, kprobes, perf events
+    - security/                             LSM, SELinux, misc security
+    - process/                              submitting patches, coding style
+
+(*) Linux man-pages project
+    https://www.kernel.org/doc/man-pages/
+    https://man7.org/linux/man-pages/
+    - Section 2: syscalls (definitive userspace interface reference)
+    - Section 4: device files (/dev/*)
+    - Section 5: /proc and /sys file formats
+    - Section 7: overviews (namespaces(7), capabilities(7), cgroups(7), etc.)
+
+(*) Linux Weekly News (LWN)
+    https://lwn.net
+    Best source for design rationale, historical context, and subsystem
+    introductions — search by topic before writing any major section.
+
+
+────────────────────────────────────────────────────────────────────────────────
+BOOKS
+────────────────────────────────────────────────────────────────────────────────
+
+(*) Linux Kernel Development — Robert Love (3rd ed.)
+    Good overview of scheduling, memory, drivers, interrupts.
+    Note: covers ~2.6 era, cross-check against current source.
+
+(*) Understanding the Linux Kernel — Bovet & Cesati (3rd ed.)
+    Deep dive into process management, memory, VFS, I/O.
+    Note: 2.6 era, still accurate for conceptual structure.
+
+(*) Linux Device Drivers — Corbet, Rubini, Kroah-Hartman (3rd ed.)
+    https://lwn.net/Kernel/LDD3/  (free online)
+    Module interface, char/block drivers, memory, interrupts.
+    Note: 2.6 era, driver API has evolved — check kernel docs for updates.
+
+    Linux Device Driver Development — John Madieu (2nd ed., 2022)
+    More current successor covering platform drivers, DT, modern APIs.
+
+(*) The Linux Programming Interface — Michael Kerrisk
+    Comprehensive userspace/syscall reference, proc/sys interfaces.
+    Covers namespaces, capabilities, signals, epoll, sockets in depth.
+
+    BPF Performance Tools — Brendan Gregg (2019)
+    Covers eBPF, BCC, bpftrace, perf, flamegraphs end-to-end.
+
+    Systems Performance — Brendan Gregg (2nd ed., 2020)
+    Methodology, perf counters, CPU/memory/disk/network observability.
+
+    Computer Systems: A Programmer's Perspective — Bryant & O'Hallaron
+    Solid hardware/OS foundation: virtual memory, linking, I/O, concurrency.
+
+
+────────────────────────────────────────────────────────────────────────────────
+ABI AND INTERFACE REFERENCES
+────────────────────────────────────────────────────────────────────────────────
+
+(*) Linux kernel user-space ABI docs
+    https://www.kernel.org/doc/html/latest/userspace-api/index.html
+
+(*) Linux allocated devices (major/minor numbers)
+    https://www.kernel.org/doc/html/latest/admin-guide/devices.html
+
+(*) POSIX / Single Unix Specification
+    https://pubs.opengroup.org/onlinepubs/9799919799/
+
+    GNU C Library (glibc) manual
+    https://www.gnu.org/software/libc/manual/
+
+    Filesystem Hierarchy Standard (FHS)
+    https://refspecs.linuxfoundation.org/fhs.shtml
+
+
+────────────────────────────────────────────────────────────────────────────────
+ARCHITECTURE REFERENCES (x86_64 focus)
+────────────────────────────────────────────────────────────────────────────────
+
+(*) Intel 64 and IA-32 Architectures Software Developer Manuals
+    https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html
+    Vol 1: Basic architecture
+    Vol 2: Instruction set reference
+    Vol 3: System programming (paging, segmentation, interrupts, VMX)
+
+(*) AMD64 Architecture Programmer's Manual
+    https://www.amd.com/en/support/tech-docs/amd64-architecture-programmers-manual-volumes-1-5
+    Vol 2: System programming (covers SVM for AMD virtualisation)
+
+    x86_64 ABI supplement (System V ABI)
+    https://gitlab.com/x86-psABIs/x86-64-ABI
+
+
+────────────────────────────────────────────────────────────────────────────────
+NETWORKING
+────────────────────────────────────────────────────────────────────────────────
+
+(*) iproute2 documentation and source
+    https://git.kernel.org/pub/scm/network/iproute2/iproute2.git
+    ip(8), tc(8), ss(8) man pages cover netlink usage clearly.
+
+(*) nftables wiki
+    https://wiki.nftables.org/
+
+    Netfilter project documentation
+    https://www.netfilter.org/documentation/
+
+    Linux Advanced Routing & Traffic Control (LARTC) HOWTO
+    https://lartc.org/howto/
+
+
+────────────────────────────────────────────────────────────────────────────────
+eBPF
+────────────────────────────────────────────────────────────────────────────────
+
+(*) BPF and XDP Reference Guide (Cilium)
+    https://docs.cilium.io/en/stable/bpf/
+
+(*) Kernel BPF documentation
+    https://www.kernel.org/doc/html/latest/bpf/index.html
+
+(*) libbpf API docs
+    https://libbpf.readthedocs.io/
+
+    bpftrace reference guide
+    https://github.com/bpftrace/bpftrace/blob/master/docs/reference_guide.md
+
+    Brendan Gregg's eBPF reference
+    https://ebpf.io/
+
+
+────────────────────────────────────────────────────────────────────────────────
+FILESYSTEMS
+────────────────────────────────────────────────────────────────────────────────
+
+(*) Ext4 documentation
+    https://www.kernel.org/doc/html/latest/filesystems/ext4/
+
+(*) XFS documentation
+    https://www.kernel.org/doc/html/latest/filesystems/xfs/
+    https://xfs.wiki.kernel.org/
+
+(*) Btrfs documentation
+    https://btrfs.readthedocs.io/
+
+    VFS documentation
+    https://www.kernel.org/doc/html/latest/filesystems/vfs.html
+
+
+────────────────────────────────────────────────────────────────────────────────
+SECURITY
+────────────────────────────────────────────────────────────────────────────────
+
+(*) Kernel self-protection project (KSPP)
+    https://kernsec.org/wiki/index.php/Kernel_Self_Protection_Project
+
+(*) SELinux notebook
+    https://github.com/SELinuxProject/selinux-notebook
+
+    AppArmor documentation
+    https://gitlab.com/apparmor/apparmor/-/wikis/home
+
+    Landlock documentation
+    https://landlock.io/
+    https://www.kernel.org/doc/html/latest/userspace-api/landlock.html
+
+
+────────────────────────────────────────────────────────────────────────────────
+HARDWARE / FIRMWARE
+────────────────────────────────────────────────────────────────────────────────
+
+(*) ACPI specification
+    https://uefi.org/specifications  (ACPI 6.x)
+
+(*) PCI Express Base Specification
+    https://pcisig.com/specifications  (requires free registration)
+
+(*) UEFI specification
+    https://uefi.org/specifications
+
+    OSDev wiki (useful for low-level boot, ACPI, hardware interface details)
+    https://wiki.osdev.org/
+
+
+────────────────────────────────────────────────────────────────────────────────
+COMMUNITY AND SUPPLEMENTAL
+────────────────────────────────────────────────────────────────────────────────
+
+    Kernel mailing lists (LKML and subsystem lists)
+    https://lore.kernel.org/  (searchable archive of all kernel lists)
+
+    Linux kernel newbies
+    https://kernelnewbies.org/  (changelogs per release, concept explanations)
+
+    Bootlin Elixir cross-referencer (browse kernel source with symbol links)
+    https://elixir.bootlin.com/linux/latest/source
+
+    gregkh blog (Greg Kroah-Hartman, driver/USB/stable maintainer)
+    http://www.kroah.com/log/
+
+    Jonathan Corbet's LWN kernel coverage
+    https://lwn.net/Archives/
+
+    The /proc filesystem documentation
+    https://www.kernel.org/doc/html/latest/filesystems/proc.html

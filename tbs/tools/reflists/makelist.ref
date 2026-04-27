@@ -1,0 +1,10 @@
+# Pointers to makefiles
+# FMT: NAME, ARGS, DIR (FOR MAKE)
+# Split by tabs, puting NULL in args only runs "make"
+
+# LAB
+Trail	NULL	lab/trail
+
+# USR
+VisHash	NULL	usr/vishash
+KeyDetect	NULL	usr/key_detect

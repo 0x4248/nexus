@@ -1,0 +1,1 @@
+FILE = "COMMIT_MSG.txt"

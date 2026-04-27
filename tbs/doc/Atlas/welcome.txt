@@ -1,0 +1,50 @@
+<style>
+@font-face {
+    font-family: 'FullPack2025';
+    src: url('/ttf/FP.ttf');
+}  
+</style>
+
+<p style="text-align:center;font-size:50px;font-family:&quot;FullPack2025&quot;;color: white;margin-bottom:-50px;">ATLAS</p>
+
+<h1>Welcome to Atlas</h1>
+
+Atlas provides a navigable view into the internal workings of this repository a mix of experiments, low-level prototypes, and assorted systems code.
+
+Nothing here is arranged for show; directories reflect the actual structure of the work: boot code, small utilities, test rigs, hardware notes, and fragments that existed solely to answer a technical question at the time.
+
+Use the explorer to move through the tree and inspect individual projects. Atlas will also show you the <i>README</i> files and notes put on each folder. Some folders contain complete tools; others hold only a few lines of code or a build script used once and kept for reference. Treat this space as a working archive rather than a polished product.
+
+If you are looking for items that don’t fit neatly into source control such as binary dumps, temporary artifacts, and other debris go to <i>ext/JunkDrawer</i>.
+
+<b>Directory Overview</b>
+
+* <b>arch/</b>      Architecture-specific code and boot experiments
+* <b>systems/</b>   OS-specific tools and tests
+* <b>usr/</b>       User-space utilities
+* <b>lab/</b>       Scratch work, prototypes, small experiments
+* <b>misc/</b>      One-off fragments, language tests, and assorted files
+* <b>ext/</b>       External libraries and third-party components
+* <b>doc/</b>       Notes, references, and assorted documentation
+* <b>tools/</b>     Build helpers and maintenance utilities
+* <b>log/</b>       Git logs, Journals and build notes. Mainly for record keeping.
+
+<b>Atlas Features</b>
+
+Tho Atlas looks simple at first glance, it has some useful features to help you
+navigate the repository such as:
+
+* <b>Quick Github Links:</b> When any file is open you can jump to its Github page
+  by clicking the <i>View on GitHub</i> button at the top right.
+* <b>Markdown Rendering:</b> README files and notes are rendered in HTML for
+  easier reading.
+* <b>Line Numbering:</b> Code files show line numbers to help you reference
+  specific parts of the code.
+* <b>RAW View:</b> You can view the raw text of any file by clicking the
+  <i>View RAW</i> button next to the Github link.
+* <b>Similar File Search:</b> When viewing a file, you can search on github for
+    files with a similar file name by clicking the <i>Search Similar Files</i> button.
+
+<i>Note:</i> Atlas is a work in progress and may have some rough edges. Atlas also
+can not open raw or large files, therefore it will show a message when it encounters
+such files.

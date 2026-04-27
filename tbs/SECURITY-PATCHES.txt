@@ -1,0 +1,22 @@
+SECURITY PATCHES
+===============
+
+This file contains a list of security patches applied to the codebase. Each entry
+is in the format of:
+- ID
+- Package/Project/Module Name
+- Date
+- Description of the vulnerability
+- Commit hash
+
+The ID is built using "42SEC-YYYYMMDD"
+
+------------------------------------[BEGIN]------------------------------------
+
+42SEC-20240615
+lib/rootGuard
+2024-06-15
+Prevented reading of /etc/shadow which could leak into memory and be read by
+an attacker with sufficient privileges.
+
+New commit only checks the access rights to /etc/shadow instead of reading it.

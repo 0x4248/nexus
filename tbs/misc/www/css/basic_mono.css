@@ -1,0 +1,85 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
+
+:root {
+    --bg-dark: #000;
+    --bg-light: #000;
+    --text: #cccccc;
+    --text-alt: #fff;
+    --text-alt-colour: #69f;
+    --text-alt-colour-darker: rgb(102, 219, 255);
+    --color-codeblock-background: #1a1a1a;
+    --color-hr: #b4b4b4;
+}
+
+* {
+    font-size: 14px;
+    font-family: "JetBrains Mono", monospace;
+    background: var(--bg-dark);
+    color: var(--text);
+}
+
+pre {
+    white-space: pre-wrap;
+}
+
+a:link {
+    color: var(--text-alt-colour);
+    text-decoration: none;
+}
+
+a:visited {
+    color: var(--text-alt-colour-darker);
+}
+
+*.q {
+    color: var(--text-alt);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+strong {
+    font-weight: 800;
+    color: var(--text-alt);
+    margin: 0;
+}
+
+hr {
+    border: none;
+    border-top: 1px dashed var(--color-hr);
+    height: 1px;
+    width: 100%;
+}
+
+button,
+textarea,
+input,
+select {
+    border: 2px solid var(--text-alt-colour);
+}
+
+img {
+    max-width: 250px;
+    max-height: 250px;
+    border-radius: 4px;
+}
+
+b,
+strong {
+    color: var(--text-alt);
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+blockquote {
+    margin: 0;
+    padding: 0;
+    border-left: 4px solid var(--text-alt-colour);
+    padding-left: 10px;
+}

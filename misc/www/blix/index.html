@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The official Blix website</title>
+    <style>
+        :root{
+            --primary-bg: #0d0d0d;
+            --primary-color: #e6eef9;
+            --accent: #56a5ff;
+            --muted: #9b9b9b;
+            --card-bg: #151515;
+            --border: #2d2d2d;
+        }
+
+        html,body{height:100%;}
+        body{
+            margin:0;
+            font-family: 'JetBrains Mono', monospace, monospace;
+            background:var(--primary-bg);
+            color:var(--primary-color);
+            -webkit-font-smoothing:antialiased;
+            -moz-osx-font-smoothing:grayscale;
+        }
+
+        .container{
+            max-width:1000px;
+            margin:24px auto;
+            padding:20px;
+            background-color: var(--card-bg);
+            border:1px solid var(--border);
+        }
+
+        .content h1{font-family:'Departure Mono', monospace; text-align:center; font-size:22px; margin:0 0 8px 0;}
+        .content i{color:var(--muted); display:block; text-align:center; margin-bottom:12px}
+        .content h2{color:var(--accent); margin-top:18px}
+        .content h3{color:var(--muted)}
+
+        code.colour{background:#fff;color:#000;padding:0.1em 0.3em;border-radius:4px}
+
+        img{max-width:100%;height:auto;border-radius:4px;border:1px solid var(--border);display:block;margin:8px 0}
+
+        /* gallery as responsive grid */
+        .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin:8px 0}
+
+        pre,code{background:transparent;border:1px solid var(--border);padding:4px;color:var(--primary-color)}
+
+        hr{border:none;border-top:1px solid #222;margin:16px 0}
+
+        a{color:var(--accent)}
+
+        @media (max-width:600px){.container{margin:12px;padding:14px}}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <main class="content">
+            <h1>Official Blix artwork and documentation</h1>
+            <i>Created by the original author — news, updates, and reference material.</i>
+            <hr>
+            <h2>About</h2>
+            <p>Blix is an anthropomorphic folf (fox-wolf hybrid) and my personal fursona. The character features blue, white, and black fur. The name "Blix" comes from the dominant blue ("Bl") plus the "x", which is derived from my username 0x4248.</p>
+            <h3>Key Features</h3>
+            <ul>
+                <li>Folf (fox-wolf hybrid)</li>
+                <li>Pronouns: he/they</li>
+                <li>Blue, white, light grey, and dark grey fur
+                    <ul>
+                        <li>White parts are below nose and go to sides</li>
+                        <li>Light grey parts are in ears</li>
+                        <li>Dark grey parts are on the outside of ears</li>
+                    </ul>
+                </li>
+                <li>Blue fur on the inner ear surfaces</li>
+                <li>Blue eyes</li>
+                <li>Black bandana (optional)</li>
+                <li>Paws are a darker blue</li>
+                <li>Black nose</li>
+                <li>Body
+                    <ul>
+                        <li>Two grey stripes on each arm with a thin black outline</li>
+                        <li>Grey marking near the tip of the tail</li>
+                        <li>Two larger grey stripes on each leg, similar to the arm markings</li>
+                    </ul>
+                </li>
+            </ul>
+            <ul>
+            <li>Main blue - <code class="colour">#6ca6ea</code>
+                <ul>
+                    <li>Shadow - <code class="colour">#5886be</code></li>
+                    <li>Light shadow - <code class="colour">#679fe0</code></li>
+                </ul>
+            </li>
+            <li>Light grey - <code class="colour">#383d47</code>
+                <ul>
+                    <li>Shadow - <code class="colour">#282a32</code></li>
+                </ul>
+            </li>
+            <li>Grey - <code class="colour">#24282f</code></li>
+            <li>White - <code class="colour">#fdfef9</code>
+                <ul>
+                    <li>Shadow - <code class="colour">#cbcbcb</code></li>
+                    <li>Shadow dark - <code class="colour">#a8a8a8</code></li>
+                </ul>
+            </li>
+            <li>Bandana - <code class="colour">#32363b</code>
+                <ul>
+                    <li>Shadow - <code class="colour">#222529</code></li>
+                </ul>
+            </li>
+            <li>Eye colour - <code class="colour">#222529</code></li>
+            </ul>
+            <hr>
+            <h2>Gallery</h2>
+            <p>Official artwork and reference images:</p>
+
+            <div class="gallery">
+                <img src="img/blix_new.png" alt="Blix new">
+                <img src="img/blix_smirk.png" alt="Blix smirk">
+                <img src="img/blix_smirk_highlight.png" alt="Blix smirk highlight">
+                <img src="img/blix_smirk_pink.png" alt="Blix smirk pink">
+                <img src="img/blix_pfp_old.png" alt="Blix pfp old">
+                <img src="img/blix_ref.png" alt="Blix reference">
+                <img src="img/blix_smile_old.jpg" alt="Blix smile old">
+                <img src="img/blix_old.png" alt="Blix old">
+            </div>
+            <hr>
+            <h2>Donated artwork</h2>
+            <p>Email <code>0x4248@protonmail.com</code> if you would like to add your artwork!</p>
+            <div class="gallery">
+                <div>
+                    <img src="img/donated/stellaris.png" alt="Blix donated 1">
+                    <p>By Stellaris</p>
+                    <i style="font-size: small;color:grey;text-align: left;margin:0;">Its very cute and I love it; would be cool to see it colored in the future!</i>
+                </div>
+            </div>
+            <hr>
+            <h2>Official Links</h2>
+            <a href="https://www.furaffinity.net/user/0x4248/">FurAffinity</a>
+        </main>
+    </div>
+</body>
+</html>

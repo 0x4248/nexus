@@ -19,7 +19,7 @@ start:
     mov al, 25         ; number of sectors to read
     mov ch, 0         ; cylinder
     mov cl, 2         ; sector
-    mov dh, 0         ; head
+    mov dh, 0         ; head 
     mov dl, 0x00      ; floppy drive
     mov bx, 0x8000    ; memory address to load kernel
     int 0x13
@@ -29,8 +29,16 @@ start:
     jmp 0x0000:0x8000
 
 disk_error:
+    mov si, err_msg
+    or al, al
+    jz .done
+    mov ah, 0x0E
+    int 0x10
+.done:
     hlt
 
 ; Pad to 510 bytes
 times 510 - ($ - $$) db 0
 dw 0xAA55
+
+err_msg db "Disk read error!", 0

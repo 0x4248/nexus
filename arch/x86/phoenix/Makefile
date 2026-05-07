@@ -37,4 +37,4 @@ clean:
 	rm -rf $(CLEAN)
 	
 run:
-	qemu-system-x86_64 -fda $(BIN)/floppy.img
+	qemu-system-x86_64 -fda $(BIN)/floppy.img -audiodev pa,id=speaker -machine pcspk-audiodev=speaker

@@ -30,13 +30,9 @@ start:
 %include "src/lib/print.s"
 %include "src/lib/colorscreen.s"
 %include "src/lib/keyboard.s"
+%include "src/lib/power.s"
 
-reboot:
-    mov ah, 0
-    mov al, 3
-    int 0x10
-    int 0x19
-    hlt
+
 
 ; --- Main ---
 main:
@@ -47,14 +43,10 @@ main:
     call print_string
     call new_line
 
-    mov ah, 0x0E
-    mov al, 0x20
-
-    int 0x10
-
 .loop:
     mov si, msg2
     call print_string
+    call new_line
     call wait_key
     cmp al, 'r'
     je reboot

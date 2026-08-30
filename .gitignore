@@ -109,3 +109,4 @@ COMMIT_MSG.old
 !*.bash
 !*.fish
 !*.php
+!*.rexx
